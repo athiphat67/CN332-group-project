@@ -55,6 +55,8 @@
 
 ---
 
-## Presentation
+## Homework1
 https://www.canva.com/design/DAG-aJOQlKc/mB4-hDIAxODiueltVFJRgw/edit?utm_content=DAG-aJOQlKc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton 
+
+https://heyzine.com/flip-book/92968f36d7.html
 

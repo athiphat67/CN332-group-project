@@ -40,7 +40,6 @@
 #### 🛠 B. Detected Maintenance & IoT (ส่วนเฝ้าระวังและซ่อมบำรุง)
 * **Water Quality Monitoring:** วิเคราะห์ค่าน้ำด้วย Machine Learning (LSTM Autoencoder) เพื่อตรวจจับสารปนเปื้อน 
 * **Drain Blockage Detection (Sound AI):** ใช้ไมโครโฟนดักฟังเสียงท่อระบายน้ำ แปลงเป็น Mel-Spectrogram และวิเคราะห์ด้วย AI เพื่อหาแพทเทิร์นการอุดตัน 
-* **Flood Prevention:** แจ้งเตือนความเสี่ยงน้ำท่วมจากระดับน้ำและความเร็วในท่อ พร้อมแนะนำเส้นทางเลี่ยง 
 * **Auto-Job Creation:** เมื่อพบความผิดปกติ ระบบจะสร้างใบงานแจ้งซ่อมและระบุพิกัด GPS ส่งให้ทีมช่างอัตโนมัติ 
 
 ---
@@ -56,5 +55,6 @@
 
 ---
 
-## PRESENTATION 
-https://www.canva.com/design/DAG-aJOQlKc/mB4-hDIAxODiueltVFJRgw/edit?utm_content=DAG-aJOQlKc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+## Presentation
+https://www.canva.com/design/DAG-aJOQlKc/mB4-hDIAxODiueltVFJRgw/edit?utm_content=DAG-aJOQlKc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton 
+

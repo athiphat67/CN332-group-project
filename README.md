@@ -61,10 +61,10 @@
 ## Homework 1
 https://www.canva.com/design/DAG-aJOQlKc/mB4-hDIAxODiueltVFJRgw/edit?utm_content=DAG-aJOQlKc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton 
 
-https://heyzine.com/flip-book/92968f36d7.html
+[**Concept_Paper**](Documents/hm1_CONCEPT_PAPER.pdf)
 
 ## Homework 2
-[**การแจกแจง Requirement**](Documents/CN332_Project_การแจกแจงrequirement.pdf)
+[**การแจกแจงrequirement**](Documents/hm2_การแจกแจงrequirement.pdf)
 
 ## Homework 3
 

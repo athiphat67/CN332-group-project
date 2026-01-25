@@ -59,12 +59,13 @@
 # Homework
 
 ## Homework 1
-https://www.canva.com/design/DAG-aJOQlKc/mB4-hDIAxODiueltVFJRgw/edit?utm_content=DAG-aJOQlKc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton 
 
 [**Concept_Paper**](Documents/hm1_CONCEPT_PAPER.pdf)
+[**Presentation_Iteration1**](Documents/iteration1-BaanHao.pdf)
 
 ## Homework 2
 [**การแจกแจงrequirement**](Documents/hm2_การแจกแจงrequirement.pdf)
+[**Presentation_Iteration2**](Documents/iteration2-BaanHao.pdf)
 
 ## Homework 3
 

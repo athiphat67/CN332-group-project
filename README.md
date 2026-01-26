@@ -1,4 +1,4 @@
-# 🏡 ระบบบริหารจัดการหมู่บ้านจัดสรรอัจฉริยะ
+j# 🏡 ระบบบริหารจัดการหมู่บ้านจัดสรรอัจฉริยะ
 
 > **Course:** CN332 - Object-Oriented Analysis and Design  
 > **Instructor:** ผู้ช่วยศาสตราจารย์ ดร.พิศาล แก้วประภา
@@ -71,5 +71,10 @@
 
 ## Homework 3
 [**Presentation_Iteration3**](Documents/iteration3-BaanHao.pdf)
+
 [**Presentation Canva**](https://www.canva.com/design/DAG-12vJwHI/FFv4AjDZGIT0hqmoKelIXQ/view?utm_content=DAG-12vJwHI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h50f6ef177b)
 
+## presentetion 
+date 26/01/2026
+iteretion 1-3
+comment ให้ดูตัวอย่างการสืบทอดclassที่ยืดหยุ่นมากขึ้น

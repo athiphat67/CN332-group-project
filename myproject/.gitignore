@@ -9,4 +9,4 @@ env/
 .DS_Store
 
 # Editor
-.vscode/
+.vscode/g

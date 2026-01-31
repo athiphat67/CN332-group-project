@@ -78,3 +78,6 @@ j# 🏡 ระบบบริหารจัดการหมู่บ้าน
 date 26/01/2026
 iteretion 1-3
 comment ให้ดูตัวอย่างการสืบทอดclassที่ยืดหยุ่นมากขึ้น
+
+## Homwork 4
+[**GUI walkthrough video**](https://youtu.be/iN0auSOAE78)

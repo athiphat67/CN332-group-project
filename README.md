@@ -73,6 +73,6 @@ iteretion 1-3
 comment ให้ดูตัวอย่างการสืบทอดclassที่ยืดหยุ่นมากขึ้น
 
 ## Homwork 4
-[**GUI Website walkthrough video**](https://youtu.be/iN0auSOAE78)
+[**GUI Website walkthrough video**](https://youtu.be/igLxI9eYJGI?si=iCysm1rsU2UA-4bB)
 
 [**GUI LineOA walkthrough video**](https://youtube.com/shorts/j89uEZ3Yu6c?feature=share)

@@ -69,3 +69,5 @@ j# 🏡 ระบบบริหารจัดการหมู่บ้าน
 [**GUI Website walkthrough video**](https://youtu.be/igLxI9eYJGI?si=iCysm1rsU2UA-4bB)
 
 [**GUI LineOA walkthrough video**](https://youtube.com/shorts/j89uEZ3Yu6c?feature=share)
+
+(https://www.canva.com/design/DAHAFyUEYw0/wlnpwTFB8YmrH7Vsh38MAg/edit?utm_content=DAHAFyUEYw0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)

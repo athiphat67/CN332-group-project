@@ -55,8 +55,8 @@ j# 🏡 ระบบบริหารจัดการหมู่บ้าน
 | :--- | :--- | :--- |
 | **Week 1: Concept** | [📄 Concept Paper](Documents/Iteration1/hm1_CONCEPT_PAPER.pdf) | [📊 Iteration 1](Documents/Iteration1/iteration1-BaanHao.pdf) |
 | **Week 2: Requirements** | [📄 การแจกแจง Requirement](Documents/Iteration2/hm2_การแจกแจงrequirement.pdf) | [📊 Iteration 2](Documents/Iteration2/iteration2-BaanHao.pdf) |
-| **Week 3: Development** | - | [📊 Iteration 3](Documents/Iteration3/iteration3-BaanHao.pdf)  [🎨 Canva Link](https://www.canva.com/design/DAG-12vJwHI/FFv4AjDZGIT0hqmoKelIXQ/view?utm_content=DAG-12vJwHI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h50f6ef177b) |
-| **Week 4: Final Demo** | [GUI Website Walkthrough Video]([https://youtu.be/iN0auSOAE78](https://youtu.be/igLxI9eYJGI?si=iCysm1rsU2UA-4bB)) <br> [LineOA Walkthrough Video](https://youtube.com/shorts/j89uEZ3Yu6c?feature=share) | - |
+| **Week 3: Development** | - | [📊 Iteration 3](Documents/Iteration3/iteration3-BaanHao.pdf) <br> [🎨 Canva Link](https://www.canva.com/design/DAG-12vJwHI/FFv4AjDZGIT0hqmoKelIXQ/view?utm_content=DAG-12vJwHI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h50f6ef177b) |
+| **Week 4: Final Demo** | [GUI Website Walkthrough Video](https://youtu.be/iN0auSOAE78](https://youtu.be/igLxI9eYJGI?si=iCysm1rsU2UA-4bB)) <br> [LineOA Walkthrough Video](https://youtube.com/shorts/j89uEZ3Yu6c?feature=share) | - |
 
 ---
 

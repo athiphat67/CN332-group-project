@@ -49,28 +49,21 @@ j# 🏡 ระบบบริหารจัดการหมู่บ้าน
 ---
 
 ---
-# Homework
+# 📋 Project Progress
 
-## Homework 1
+| Phase / Homework | Documentation | Presentation Slide |
+| :--- | :--- | :--- |
+| **Week 1: Concept** | [📄 Concept Paper](Documents/Iteration1/hm1_CONCEPT_PAPER.pdf) | [📊 Iteration 1](Documents/Iteration1/iteration1-BaanHao.pdf) |
+| **Week 2: Requirements** | [📄 การแจกแจง Requirement](Documents/Iteration2/hm2_การแจกแจงrequirement.pdf) | [📊 Iteration 2](Documents/Iteration2/iteration2-BaanHao.pdf) |
+| **Week 3: Development** | - | [📊 Iteration 3](Documents/Iteration3/iteration3-BaanHao.pdf)  [🎨 Canva Link](https://www.canva.com/design/DAG-12vJwHI/FFv4AjDZGIT0hqmoKelIXQ/view?utm_content=DAG-12vJwHI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h50f6ef177b) |
+| **Week 4: Final Demo** | [GUI Website Walkthrough Video]([https://youtu.be/iN0auSOAE78](https://youtu.be/igLxI9eYJGI?si=iCysm1rsU2UA-4bB)) [LineOA Walkthrough Video](https://youtube.com/shorts/j89uEZ3Yu6c?feature=share) | - |
 
-[**Concept_Paper**](Documents/hm1_CONCEPT_PAPER.pdf)
+---
 
-[**Presentation_Iteration1**](Documents/iteration1-BaanHao.pdf)
+## 📝 Instructor Feedback
 
-## Homework 2
-[**การแจกแจงrequirement**](Documents/hm2_การแจกแจงrequirement.pdf)
-
-[**Presentation_Iteration2**](Documents/iteration2-BaanHao.pdf)
-
-## Homework 3
-[**Presentation_Iteration3**](Documents/iteration3-BaanHao.pdf)
-
-[**Presentation Canva**](https://www.canva.com/design/DAG-12vJwHI/FFv4AjDZGIT0hqmoKelIXQ/view?utm_content=DAG-12vJwHI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h50f6ef177b)
-
-## presentetion 
-date 26/01/2026
-iteretion 1-3
-comment ให้ดูตัวอย่างการสืบทอดclassที่ยืดหยุ่นมากขึ้น
+> **(26/01/2026) - Presentaion (Iteration 1-3)**
+> * **Comment:** ให้ดูตัวอย่างการสืบทอด Class ที่ยืดหยุ่นมากขึ้น
 
 ## Homwork 4
 [**GUI Website walkthrough video**](https://youtu.be/igLxI9eYJGI?si=iCysm1rsU2UA-4bB)

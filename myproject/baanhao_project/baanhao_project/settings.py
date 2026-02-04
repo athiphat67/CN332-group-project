@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'users',
     'properties',
     'issues',
+    'dashboard',
 ]
 
 MIDDLEWARE = [

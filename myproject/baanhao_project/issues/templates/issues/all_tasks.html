@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Tasks - Baan Hao</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            --header-bg: #5D4037;  /* สีน้ำตาลเข้มตามแถบบน */
+            --sidebar-bg: #90CAF9; /* สีฟ้าด้านซ้าย (ประมาณการ) */
+            --main-bg: #FFF8E1;    /* สีครีมพื้นหลัง */
+            --active-nav: #8D6E63; /* สีปุ่ม Active บน Header */
+        }
+
+        body {
+            background-color: var(--main-bg);
+            font-family: 'Sarabun', sans-serif; /* แนะนำให้ใช้ฟอนต์ไทยสวยๆ */
+            overflow-x: hidden;
+        }
+
+        /* 1. Header Styling */
+        .top-header {
+            background-color: var(--header-bg);
+            padding: 10px 20px;
+            color: white;
+        }
+        
+        .nav-link-custom {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin: 0 5px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link-custom:hover {
+            color: white;
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .nav-link-custom.active {
+            background-color: var(--sidebar-bg); /* สีฟ้าที่วงรีรอบคำว่า All task */
+            color: #333; /* ตัวหนังสือสีเข้ม */
+            font-weight: bold;
+        }
+
+        /* 2. Sidebar Styling */
+        .sidebar {
+            background: linear-gradient(180deg, #A8D1E7 0%, #87CEFA 100%); /* ไล่สีฟ้า */
+            min-height: calc(100vh - 70px); /* ความสูงเต็มจอ ลบ Header */
+            padding-top: 20px;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: #333;
+            text-decoration: none;
+            border-left: 4px solid transparent;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .sidebar-item:hover {
+            background-color: rgba(255,255,255,0.3);
+        }
+
+        .sidebar-item.active {
+            background-color: rgba(255,255,255,0.4);
+            border-left-color: #5D4037; /* ขีดสีน้ำตาลข้างหน้า */
+        }
+
+        /* 3. Task Table Styling */
+        .content-area {
+            padding: 30px;
+        }
+
+        .toolbar-btn {
+            border: none;
+            background: none;
+            color: #555;
+            font-weight: 500;
+            padding: 5px 10px;
+        }
+        
+        .toolbar-btn:hover { color: #000; }
+
+        .custom-table {
+            background-color: #FFF;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .custom-table thead th {
+            background-color: #FFF3E0;
+            color: #5D4037;
+            font-weight: 600;
+            border-bottom: 2px solid #E0E0E0;
+            padding: 15px;
+        }
+
+        .custom-table tbody td {
+            padding: 15px;
+            vertical-align: middle;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        /* Status Badges */
+        .badge-status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            width: 110px; /* บังคับความกว้างให้เท่ากันสวยๆ */
+            justify-content: center;
+        }
+        
+        .status-inprogress { background-color: #9FA8DA; color: #fff; } /* ม่วงฟ้า */
+        .status-success { background-color: #81C784; color: #fff; }    /* เขียว */
+        .status-waiting { background-color: #DCE775; color: #555; }    /* เหลืองเขียว */
+        .status-overdue { background-color: #E57373; color: #fff; }    /* แดงชมพู */
+
+        .add-task-row {
+            background-color: #E0E0E0;
+            color: #555;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .add-task-row:hover { background-color: #D5D5D5; }
+    </style>
+</head>
+<body>
+
+    <div class="d-flex justify-content-between align-items-center top-header">
+        <div class="d-flex align-items-center">
+            <div class="bg-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 45px; height: 45px;">
+                <i class="bi bi-house-door-fill text-brown fs-4" style="color: #5D4037;"></i>
+            </div>
+            <span class="fs-4 fw-bold">BAAN HAO</span>
+        </div>
+        
+        <nav class="d-none d-md-block">
+            <a href="/dashboard/" class="nav-link-custom">Dashboard</a>
+            <a href="#" class="nav-link-custom active">All task</a> <a href="#" class="nav-link-custom">Notification</a>
+            <a href="#" class="nav-link-custom">Analytic</a>
+            <a href="#" class="nav-link-custom">Staff</a>
+            <a href="#" class="nav-link-custom">Setting</a>
+        </nav>
+        
+        <button class="btn text-white d-md-none"><i class="bi bi-list fs-2"></i></button>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            
+            <div class="col-md-2 sidebar d-none d-md-block px-0">
+                <div class="mb-3 px-3">
+                    <h5 class="fw-bold text-dark"><i class="bi bi-folder2-open me-2"></i>All tasks</h5>
+                </div>
+                
+                <a href="#" class="sidebar-item">
+                    <i class="bi bi-clock me-3 fs-5"></i> Waiting
+                </a>
+                <a href="#" class="sidebar-item">
+                    <i class="bi bi-sun me-3 fs-5"></i> In progress
+                </a>
+                <a href="#" class="sidebar-item">
+                    <i class="bi bi-exclamation-circle me-3 fs-5"></i> Overdue
+                </a>
+                <a href="#" class="sidebar-item">
+                    <i class="bi bi-check2-square me-3 fs-5"></i> Complete
+                </a>
+            </div>
+
+            <div class="col-md-10 content-area">
+                
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="btn-group bg-white shadow-sm rounded-pill" role="group">
+                        <button type="button" class="btn btn-light rounded-pill px-3 active fw-bold"><i class="bi bi-list-ul"></i> List</button>
+                        <button type="button" class="btn btn-light rounded-pill px-3 text-muted"><i class="bi bi-calendar"></i> Calendar</button>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-secondary border-0"><i class="bi bi-search"></i> Search</button>
+                        <button class="btn btn-outline-secondary border-0"><i class="bi bi-funnel"></i> Filter</button>
+                        <button class="btn btn-outline-danger border-0"><i class="bi bi-trash"></i> Delete</button>
+                    </div>
+                </div>
+
+                <div class="table-responsive shadow-sm rounded">
+                    <table class="table custom-table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 50px;">#</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Location</th>
+                                <th scope="col">Assign to</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Created on</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="add-task-row">
+                                <td colspan="7" class="text-center py-2">
+                                    <i class="bi bi-plus-circle me-2"></i> Add New Task
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><input class="form-check-input" type="checkbox"></td>
+                                <td>ถนนหน้าบ้านเป็นหลุมเป็นบ่อ</td>
+                                <td>Maintenance</td>
+                                <td>Front Road</td>
+                                <td>Somchai</td>
+                                <td><span class="badge-status status-inprogress"><i class="bi bi-gear-fill me-1"></i> InProg...</span></td>
+                                <td>01 Feb 2026</td>
+                            </tr>
+
+                            <tr style="background-color: #FFFDE7;"> <td><input class="form-check-input" type="checkbox"></td>
+                                <td>ไฟทางเดินดับ</td>
+                                <td>Complaint</td>
+                                <td>Walkway</td>
+                                <td>-</td>
+                                <td><span class="badge-status status-waiting"><i class="bi bi-clock-fill me-1"></i> Waiting</span></td>
+                                <td>02 Feb 2026</td>
+                            </tr>
+
+                            <tr>
+                                <td><input class="form-check-input" type="checkbox"></td>
+                                <td>ท่อประปาแตก</td>
+                                <td>Emergency</td>
+                                <td>Building A</td>
+                                <td>Wichai</td>
+                                <td><span class="badge-status status-success"><i class="bi bi-check-circle-fill me-1"></i> Success</span></td>
+                                <td>28 Jan 2026</td>
+                            </tr>
+
+                            <tr style="background-color: #FFFDE7;">
+                                <td><input class="form-check-input" type="checkbox" checked></td>
+                                <td>เสียงดังยามวิกาล</td>
+                                <td>Complaint</td>
+                                <td>Room 404</td>
+                                <td>Security</td>
+                                <td><span class="badge-status status-overdue"><i class="bi bi-exclamation-triangle-fill me-1"></i> Overdue</span></td>
+                                <td>15 Jan 2026</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

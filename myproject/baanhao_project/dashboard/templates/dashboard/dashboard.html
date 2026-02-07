@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+
+    <h1>Dashboard</h1>
+    <p>Good morning, {{ username }}!</p>
+    <hr>
+
+    <h2>Overview Stats</h2>
+    <table border="1" cellpadding="10" cellspacing="0">
+        <tr>
+            <th>Residents Total</th>
+            <th>All Tasks</th>
+            <th>Waiting Tasks</th>
+            <th>Complete Tasks</th>
+        </tr>
+        <tr>
+            <td>
+                <h3>{{ total_residents }}</h3>
+                <small>+2.5%</small>
+            </td>
+            <td>
+                <h3>{{ total_tasks }}</h3>
+                <small>-1.2%</small>
+            </td>
+            <td>
+                <h3>{{ waiting_tasks }}</h3>
+                <small>+11%</small>
+            </td>
+            <td>
+                <h3>{{ completed_tasks }}</h3>
+                <small>+5.2%</small>
+            </td>
+        </tr>
+    </table>
+    
+    <br>
+
+    <h2>Works Progress</h2>
+    <ul>
+        <li><strong>Waiting:</strong> {{ progress_waiting }} (25%)</li>
+        <li><strong>In Progress:</strong> {{ progress_inprogress }} (50%)</li>
+        <li><strong>Overdue:</strong> {{ progress_overdue }} (25%)</li>
+    </ul>
+
+    <br>
+
+    <h2>Monthly Tasks</h2>
+    <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Current Year</th>
+                <th>Past Year</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in monthly_data %}
+            <tr>
+                <td>{{ item.month }}</td>
+                <td>{{ item.current }}</td>
+                <td>{{ item.past }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+
+    <h2>Common Fee</h2>
+    <p>
+        <strong>Achieved:</strong> {{ fee_achieved }}% <br>
+        <strong>Remaining:</strong> {{ 100|add:"-67" }}% </p>
+
+    <hr>
+    
+    <h3>Menu</h3>
+    <ul>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">All tasks</a></li>
+        <li><a href="#">Notification</a></li>
+        <li><a href="#">Analytics</a></li>
+        <li><a href="#">Staff</a></li>
+        <li><a href="#">Setting</a></li>
+    </ul>
+
+</body>
+</html>

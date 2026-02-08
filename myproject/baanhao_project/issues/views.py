@@ -1,6 +1,221 @@
 from django.shortcuts import render
 from .models import Issue
 
+from django.shortcuts import render
+from django.core.paginator import Paginator
+from django.db.models import Q
+from .models import Issue, IssueStatus, Complaint, Maintenance
+
 def all_tasks(request):
-    issues = Issue.objects.all() # ดึงงานทั้งหมดออกมา
-    return render(request, 'issues/all_tasks.html', {'issues': issues})
+    # --- 1. Base Query ---
+    # เรียกจากตารางแม่ (Issue)
+    # order_by('-created_date') ให้ตรงกับ field ใน model
+    task_list = Issue.objects.all().select_related('reporter').order_by('-created_date')
+
+    # --- 2. Search Logic (Title, Description, Location) ---
+    search_query = request.GET.get('q')
+    if search_query:
+        task_list = task_list.filter(
+            Q(title__icontains=search_query) | 
+            Q(location__icontains=search_query) |
+            Q(description__icontains=search_query)
+        )
+
+    # --- 3. Filter Logic (Status Tabs) ---
+    # Map ค่าจาก URL ให้ตรงกับ Enum ใน models.py (IssueStatus)
+    status_filter = request.GET.get('status')
+    
+    if status_filter == 'waiting':
+        task_list = task_list.filter(status=IssueStatus.PENDING)
+    elif status_filter == 'in_process':
+        task_list = task_list.filter(status=IssueStatus.IN_PROGRESS)
+    elif status_filter == 'overdue':
+        task_list = task_list.filter(status=IssueStatus.OVERDUE)
+    elif status_filter == 'complete': 
+        task_list = task_list.filter(status=IssueStatus.SUCCESS)
+
+    # --- 4. Count Data (สำหรับ Badge บน Tabs) ---
+    counts = {
+        'all': Issue.objects.count(),
+        'waiting': Issue.objects.filter(status=IssueStatus.PENDING).count(),
+        'in_process': Issue.objects.filter(status=IssueStatus.IN_PROGRESS).count(),
+        'overdue': Issue.objects.filter(status=IssueStatus.OVERDUE).count(),
+        'complete': Issue.objects.filter(status=IssueStatus.SUCCESS).count(),
+    }
+
+    # --- 5. Pagination ---
+    # UI เขียนว่า Showing 1 to 8 -> ใช้ 8 รายการต่อหน้า
+    paginator = Paginator(task_list, 30) 
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # --- 6. Data Transformation Logic ---
+    # แปลงข้อมูลเพื่อส่งไปแสดงผลให้ตรงกับ Design
+    final_tasks = []
+    
+    for task in page_obj:
+        # ข้อมูลพื้นฐานจาก Issue (Parent)
+        item = {
+            'id': task.id,
+            'title': task.title,
+            'location': task.location,
+            'created_date': task.created_date,
+            'status': task.status, # ค่าจะเป็น 'PENDING', 'IN_PROGRESS' ฯลฯ
+            'status_display': task.get_status_display(), # ค่าที่อ่านรู้เรื่อง เช่น 'Pending', 'In Progress'
+            'type': 'Issue',      # Default
+            'assign_to': '-',
+            'type_badge_class': 'badge-secondary' # Default CSS Class
+        }
+
+        # ตรวจสอบว่าเป็น Complaint หรือ Maintenance
+        # โดยใช้ hasattr เช็คว่า task instance นี้มี attributes ของลูกไหม
+        
+        if hasattr(task, 'complaint'):
+            item['type'] = 'Complaint'
+            item['type_badge_class'] = 'badge-complaint' # ไว้ไปเขียน CSS
+            # ใน Model Complaint ของคุณไม่มี field assignee
+            # แต่ใน UI มีคำว่า Security -> เราจึง Hardcode ไว้ก่อน
+            item['assign_to'] = 'Security' 
+            
+        elif hasattr(task, 'maintenance'):
+            item['type'] = 'Maintenance'
+            item['type_badge_class'] = 'badge-maintenance' # ไว้ไปเขียน CSS
+            
+            # ดึงข้อมูล Technician
+            # เข้าถึงผ่าน task.maintenance.technician
+            tech = task.maintenance.technician
+            if tech:
+                # ใช้ str(tech) ถ้า Technician model มี def __str__ 
+                # หรือ tech.user.get_full_name() ถ้าเชื่อมกับ User
+                item['assign_to'] = str(tech) 
+            else:
+                item['assign_to'] = 'Unassigned'
+
+        final_tasks.append(item)
+
+    context = {
+        'tasks': final_tasks,
+        'page_obj': page_obj,
+        'counts': counts,
+        'current_status': status_filter if status_filter else 'all',
+    }
+
+    return render(request, 'issues/all_tasks.html', context)
+
+
+def complaint_tasks(request):
+    # 1. Query: ดึงเฉพาะ Complaint เท่านั้น!
+    tasks = Complaint.objects.select_related('issue_ptr', 'reporter').order_by('-created_date')
+
+    # 2. Search Logic
+    search_query = request.GET.get('q')
+    if search_query:
+        tasks = tasks.filter(
+            Q(title__icontains=search_query) | 
+            Q(location__icontains=search_query)
+        )
+
+    # 3. Count Data (นับแยกประเภท)
+    base_qs = Complaint.objects.all()
+    counts = {
+        'all': base_qs.count(),
+        'waiting': base_qs.filter(status=IssueStatus.PENDING).count(),
+        'in_process': base_qs.filter(status=IssueStatus.IN_PROGRESS).count(),
+        'overdue': base_qs.filter(status=IssueStatus.OVERDUE).count(),
+        'complete': base_qs.filter(status=IssueStatus.SUCCESS).count(),
+    }
+
+    # 4. Pagination
+    paginator = Paginator(tasks, 30)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # 5. Data Transformation
+    final_tasks = []
+    for task in page_obj:
+        item = {
+            'title': task.title,
+            'location': task.location,
+            'created_date': task.created_date,
+            'status': task.status,
+            'assign_to': 'Security',
+        }
+        final_tasks.append(item)
+
+    context = {
+        'tasks': final_tasks,
+        'page_obj': page_obj,
+        'counts': counts,
+        'current_status': request.GET.get('status') or 'all',
+    }
+
+    return render(request, 'issues/all_tasks_complaints.html', context)
+
+def maintainance_tasks(request):
+    # --- 1. Base Query ---
+    # เรียกจากตาราง Maintenance โดยตรง
+    # select_related 'technician' เพื่อดึงชื่อช่างมาด้วยในคำสั่งเดียว (ลด Query)
+    tasks = Maintenance.objects.select_related('issue_ptr', 'reporter', 'technician').order_by('-created_date')
+
+    # --- 2. Search Logic ---
+    search_query = request.GET.get('q')
+    if search_query:
+        tasks = tasks.filter(
+            Q(title__icontains=search_query) | 
+            Q(location__icontains=search_query)
+        )
+
+    # --- 3. Filter Logic (Status) ---
+    status_filter = request.GET.get('status')
+    if status_filter == 'waiting':
+        tasks = tasks.filter(status=IssueStatus.PENDING)
+    elif status_filter == 'in_process':
+        tasks = tasks.filter(status=IssueStatus.IN_PROGRESS)
+    elif status_filter == 'overdue':
+        tasks = tasks.filter(status=IssueStatus.OVERDUE)
+    elif status_filter == 'complete': 
+        tasks = tasks.filter(status=IssueStatus.SUCCESS)
+
+    # --- 4. Count Data (เฉพาะ Maintenance) ---
+    base_qs = Maintenance.objects.all()
+    counts = {
+        'all': base_qs.count(),
+        'waiting': base_qs.filter(status=IssueStatus.PENDING).count(),
+        'in_process': base_qs.filter(status=IssueStatus.IN_PROGRESS).count(),
+        'overdue': base_qs.filter(status=IssueStatus.OVERDUE).count(),
+        'complete': base_qs.filter(status=IssueStatus.SUCCESS).count(),
+    }
+
+    # --- 5. Pagination ---
+    paginator = Paginator(tasks, 8) # 8 รายการต่อหน้า
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # --- 6. Prepare Data ---
+    final_tasks = []
+    for task in page_obj:
+        # หาชื่อช่าง
+        tech_name = 'Unassigned'
+        if task.technician:
+            # เข้าถึง User ผ่าน Technician model
+            tech_name = task.technician.user.get_full_name() or task.technician.user.username
+
+        item = {
+            'title': task.title,
+            'location': task.location,
+            'created_date': task.created_date,
+            'status': task.status,
+            'assign_to': tech_name, # ส่งชื่อช่างไปแสดง
+            'image': task.before_image.url if task.before_image else None
+        }
+        final_tasks.append(item)
+
+    context = {
+        'tasks': final_tasks,
+        'page_obj': page_obj,
+        'counts': counts,
+        'current_status': status_filter if status_filter else 'all',
+    }
+
+    # Render ไฟล์ HTML ใหม่สำหรับ Maintenance
+    return render(request, 'issues/all_tasks_maintainance.html', context)

@@ -2,7 +2,7 @@
 <div class="container-fluid py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h2 class="fw-bold">All Tasks</h2>
+            <h2 class="fw-bold">All Tasks : Complaint</h2>
             <p class="text-muted">Admin Dashboard</p>
         </div>
         
@@ -13,12 +13,12 @@
             </div>
 
             <form method="GET" class="position-relative">
-                <input type="text" name="q" class="form-control rounded-pill ps-4" placeholder="Search task..." value="{{ request.GET.q|default:'' }}">
+                <input type="text" name="q" class="form-control rounded-pill ps-4" placeholder="Search complaint..." value="{{ request.GET.q|default:'' }}">
                 <input type="hidden" name="status" value="{{ current_status }}">
             </form>
             
             <a href="#" class="btn btn-dark rounded-pill px-4 d-flex align-items-center">
-                <i class="bi bi-plus-lg me-2"></i> Create Task
+                <i class="bi bi-plus-lg me-2"></i> Create Complaint
             </a>
         </div>
     </div>
@@ -47,7 +47,7 @@
                 <thead class="bg-light text-muted">
                     <tr>
                         <th class="ps-4 py-3">Task Description</th>
-                        <th>Type</th> <th>Location</th>
+                        <th>Location</th>
                         <th>Assign To</th>
                         <th>Create On</th>
                         <th class="pe-4">Status</th>
@@ -60,17 +60,10 @@
                             <div class="d-flex align-items-center">
                                 <div class="icon-box me-3 rounded-circle d-flex align-items-center justify-content-center" 
                                      style="width: 40px; height: 40px; background-color: #F3F4F6;">
-                                    <i class="bi {% if task.type == 'Complaint' %}bi-file-text{% else %}bi-tools{% endif %} text-primary"></i>
+                                    <i class="bi bi-file-text text-primary"></i>
                                 </div>
                                 <span class="fw-medium">{{ task.title }}</span>
                             </div>
-                        </td>
-
-                        <td>
-                            <span class="badge rounded-pill px-3 py-2 fw-normal
-                                {% if task.type == 'Complaint' %}bg-light text-dark border{% else %}bg-secondary text-white{% endif %}">
-                                {{ task.type }}
-                            </span>
                         </td>
 
                         <td class="text-muted">{{ task.location }}</td>
@@ -100,9 +93,9 @@
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="6" class="text-center py-5 text-muted">
+                        <td colspan="5" class="text-center py-5 text-muted">
                             <i class="bi bi-inbox fs-1 d-block mb-2"></i>
-                            No tasks found.
+                            No complaints found.
                         </td>
                     </tr>
                     {% endfor %}

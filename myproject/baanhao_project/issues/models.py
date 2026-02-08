@@ -6,8 +6,8 @@ from django.utils import timezone
 class IssueStatus(models.TextChoices):
     PENDING = 'PENDING', 'Pending'           # รอรับเรื่อง
     IN_PROGRESS = 'IN_PROGRESS', 'In Progress' # กำลังดำเนินการ
-    RESOLVED = 'RESOLVED', 'Resolved'         # เสร็จสิ้น
-    CLOSED = 'CLOSED', 'Closed'               # ปิดงาน
+    OVERDUE = 'OVERDUE', 'Overdue'
+    SUCCESS = 'SUCCESS', 'SUCCESS'               # ปิดงาน
 
 class Priority(models.TextChoices):
     LOW = 'LOW', 'Low'

@@ -48,27 +48,31 @@ j# 🏡 ระบบบริหารจัดการหมู่บ้าน
 
 ---
 
+## 🚀 Project Progess
+
+### Week 1: Concept
+- **Documentation:** [📄 Concept Paper](Documents/Iteration1/hm1_CONCEPT_PAPER.pdf)
+- **Presentation:** [📊 Iteration 1 Slides](Documents/Iteration1/iteration1-BaanHao.pdf)
+
+### Week 2: Requirements
+- **Documentation:** [📄 การแจกแจง Requirement](Documents/Iteration2/hm2_การแจกแจงrequirement.pdf)
+- **Presentation:** [📊 Iteration 2 Slides](Documents/Iteration2/iteration2-BaanHao.pdf)
+
+### Week 3: Development
+- **Design Tool:** [🎨 Canva Link](https://www.canva.com/design/DAG-12vJwHI/FFv4AjDZGIT0hqmoKelIXQ/view?utm_content=DAG-12vJwHI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h50f6ef177b)
+- **Presentation:** [📊 Iteration 3 Slides](Documents/Iteration3/Iteration3_BannHao.pdf)
+
+### Week 4: UX/UI Demo
+- **GUI Website:** [🎥 Walkthrough Video](https://youtu.be/igLxI9eYJGI?si=iCysm1rsU2UA-4bB)
+- **Line OA:** [📱 Short Demo Video](https://youtube.com/shorts/j89uEZ3Yu6c?feature=share)
+
 ---
-# 📋 Project Progress
 
-| Phase / Homework | Documentation | Presentation Slide |
-| :--- | :--- | :--- |
-| **Week 1: Concept** | [📄 Concept Paper](Documents/Iteration1/hm1_CONCEPT_PAPER.pdf) | [📊 Iteration 1](Documents/Iteration1/iteration1-BaanHao.pdf) |
-| **Week 2: Requirements** | [📄 การแจกแจง Requirement](Documents/Iteration2/hm2_การแจกแจงrequirement.pdf) | [📊 Iteration 2](Documents/Iteration2/iteration2-BaanHao.pdf) |
-| **Week 3: Development** | - | [📊 Iteration 3](Documents/Iteration3/Iteration3-BaanHao.pdf) <br> [🎨 Canva Link](https://www.canva.com/design/DAG-12vJwHI/FFv4AjDZGIT0hqmoKelIXQ/view?utm_content=DAG-12vJwHI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h50f6ef177b) |
-| **Week 4: Final Demo** | [GUI Website Walkthrough Video](https://youtu.be/iN0auSOAE78](https://youtu.be/igLxI9eYJGI?si=iCysm1rsU2UA-4bB)) <br> [LineOA Walkthrough Video](https://youtube.com/shorts/j89uEZ3Yu6c?feature=share) | - |
+## 📝 Instructor Feedback Log
+
+> [!IMPORTANT]
+> **Date: 26/01/2026 (Iteration 1-3)**
+> - **Comment:** ให้ดูตัวอย่างการสืบทอด Class (Inheritance) ที่ยืดหยุ่นมากขึ้น เพื่อให้ Code Clean และจัดการ Logic ได้ง่ายขึ้น
 
 ---
-
-## 📝 Instructor Feedback
-
-> **(26/01/2026) - Presentaion (Iteration 1-3)**
-> * **Comment:** ให้ดูตัวอย่างการสืบทอด Class ที่ยืดหยุ่นมากขึ้น
-
-## Homwork 4
-[**GUI Website walkthrough video**](https://youtu.be/igLxI9eYJGI?si=iCysm1rsU2UA-4bB)
-
-[**GUI LineOA walkthrough video**](https://youtube.com/shorts/j89uEZ3Yu6c?feature=share)
-
-## Iteration 4
-https://www.canva.com/design/DAHAFyUEYw0/wlnpwTFB8YmrH7Vsh38MAg/edit?utm_content=DAHAFyUEYw0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+*Last Updated: 2026-02-08*

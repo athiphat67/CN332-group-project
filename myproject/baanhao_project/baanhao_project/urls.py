@@ -18,7 +18,16 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+
+    # Django administration
     path('admin/', admin.site.urls),
+    
+    # Home : dashboard
     path('', include('dashboard.urls')),
+    
+    # Issue
     path('all_tasks/', include('issues.urls')),
+    
+    # Users
+    path('users/', include('users.urls')),
 ]

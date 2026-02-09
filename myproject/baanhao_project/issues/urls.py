@@ -7,4 +7,6 @@ urlpatterns = [
     path('maintenance/', views.maintenance_tasks, name='maintenance_tasks'),
     path('create/complaint/', views.create_complaint, name='create_complaint'),
     path('create/maintenance/', views.create_maintenance, name='create_maintenance'),
+    path('maintenance/<int:pk>/', views.maintenance_detail, name='maintenance_detail'),
+    path('complaint/<int:pk>/', views.complaint_detail, name='complaint_detail'),
 ]

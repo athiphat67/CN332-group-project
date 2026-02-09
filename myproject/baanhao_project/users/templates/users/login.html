@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Baan Hao Smart Living</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            display: flex;
+            width: 100%;
+            max-width: 500px;
+            background: linear-gradient(180deg, #FFF8E1 0%, #FFECB3 100%);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Form Section */
+        .right-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+        }
+
+        .form-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .login-form {
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #E0E0E0;
+            border-radius: 30px;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #7C4DFF;
+            box-shadow: 0 0 0 4px rgba(124, 77, 255, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #9E9E9E;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 25px;
+        }
+
+        .forgot-password a {
+            color: #7C4DFF;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: #651FFF;
+            text-decoration: underline;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #7C4DFF 0%, #536DFE 50%, #448AFF 100%);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(124, 77, 255, 0.4);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(124, 77, 255, 0.5);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .footer-text {
+            margin-top: 40px;
+            text-align: center;
+            color: #757575;
+            font-size: 12px;
+        }
+
+        /* Error Messages */
+        .error-messages {
+            background: #FFEBEE;
+            border: 1px solid #FFCDD2;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .error-messages ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .error-messages li {
+            color: #C62828;
+            font-size: 13px;
+            padding: 3px 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .login-container {
+                max-width: 400px;
+            }
+
+            .right-section {
+                padding: 40px 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <!-- Form Section -->
+        <div class="right-section">
+            <h1 class="form-title">Sign In</h1>
+
+            {% if messages %}
+            <div class="error-messages">
+                <ul>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <form class="login-form" method="post" action="{% url 'users:login' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="username" class="form-input" placeholder="Email or Username" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" class="form-input" placeholder="Password" required>
+                </div>
+                <div class="forgot-password">
+                    <a href="{% url 'users:password_reset' %}">Forgot password?</a>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z" />
+                    </svg>
+                    Sign in
+                </button>
+            </form>
+
+            <p class="footer-text">Where Logic Meets Living. Established 2026.</p>
+        </div>
+    </div>
+</body>
+
+</html>

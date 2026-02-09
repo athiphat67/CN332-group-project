@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Issue
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.db.models import Q
 from .models import Issue, IssueStatus, Complaint, Maintenance
@@ -135,6 +135,7 @@ def complaint_tasks(request):
     final_tasks = []
     for task in page_obj:
         item = {
+            'id': task.id,
             'title': task.title,
             'location': task.location,
             'created_date': task.created_date,
@@ -202,6 +203,7 @@ def maintenance_tasks(request):
             tech_name = task.technician.user.get_full_name() or task.technician.user.username
 
         item = {
+            'id': task.id,
             'title': task.title,
             'location': task.location,
             'created_date': task.created_date,
@@ -246,3 +248,33 @@ def create_maintenance(request):
         form = MaintenanceForm()
 
     return render(request, 'issues/create_maintenance.html', {'form': form})
+
+def maintenance_detail(request, pk):
+    task = get_object_or_404(Maintenance, pk=pk)
+    
+    # Logic สำหรับปุ่มกดเปลี่ยนสถานะ (Action Buttons)
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        if action == 'complete':
+            task.status = IssueStatus.SUCCESS
+            task.save()
+        elif action == 'cancel':
+            # เนื่องจากใน Enum เดิมไม่มี CANCELLED อาจจะใช้การลบ หรือเพิ่ม Status ใหม่ใน models.py
+            # ในที่นี้สมมติว่าให้เป็น SUCCESS ไปก่อน หรือคุณไปเพิ่ม Status 'CANCELLED' เองนะครับ
+            pass 
+        return redirect('maintenance_detail', pk=pk)
+
+    return render(request, 'issues/maintenance_detail.html', {'task': task})
+
+def complaint_detail(request, pk):
+    task = get_object_or_404(Complaint, pk=pk)
+    
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        if action == 'complete':
+            task.status = IssueStatus.SUCCESS
+            task.save()
+        # Complaint อาจไม่มีปุ่ม Cancel หรือมี Logic ต่างกัน
+        return redirect('complaint_detail', pk=pk)
+
+    return render(request, 'issues/complaint_detail.html', {'task': task})

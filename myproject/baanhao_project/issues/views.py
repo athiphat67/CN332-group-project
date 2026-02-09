@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from .models import Issue
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from django.db.models import Q
 from .models import Issue, IssueStatus, Complaint, Maintenance
+from .forms import ComplaintForm, MaintenanceForm
 
 def all_tasks(request):
     # --- 1. Base Query ---
@@ -151,7 +152,7 @@ def complaint_tasks(request):
 
     return render(request, 'issues/all_tasks_complaints.html', context)
 
-def maintainance_tasks(request):
+def maintenance_tasks(request):
     # --- 1. Base Query ---
     # เรียกจากตาราง Maintenance โดยตรง
     # select_related 'technician' เพื่อดึงชื่อช่างมาด้วยในคำสั่งเดียว (ลด Query)
@@ -218,4 +219,30 @@ def maintainance_tasks(request):
     }
 
     # Render ไฟล์ HTML ใหม่สำหรับ Maintenance
-    return render(request, 'issues/all_tasks_maintainance.html', context)
+    return render(request, 'issues/all_tasks_maintenance.html', context)
+
+def create_complaint(request):
+    if request.method == 'POST':
+        form = ComplaintForm(request.POST, request.FILES)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.status = 'PENDING' # กำหนดค่าเริ่มต้น
+            task.save()
+            return redirect('complaint_tasks')
+    else:
+        form = ComplaintForm()
+    
+    return render(request, 'issues/create_complaint.html', {'form': form})
+
+def create_maintenance(request):
+    if request.method == 'POST':
+        form = MaintenanceForm(request.POST, request.FILES)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.status = 'PENDING'
+            task.save()
+            return redirect('maintenance_tasks')
+    else:
+        form = MaintenanceForm()
+
+    return render(request, 'issues/create_maintenance.html', {'form': form})

@@ -5,29 +5,34 @@
             <p class="text-muted">Admin Dashboard</p>
         </div>
 
+        <a href="{% url 'dashboard' %}" class="text-decoration-none text-muted mb-2 d-inline-block">
+            <i class="bi bi-arrow-left me-1"></i> Back to Dashboard
+        </a>
+
         <a href="{% url 'maintenance_tasks' %}" class="text-decoration-none text-muted mb-2 d-inline-block">
             <i class="bi bi-arrow-left me-1"></i> All Maintenance Tasks
 
-        <a href="{% url 'complaint_tasks' %}" class="text-decoration-none text-muted mb-2 d-inline-block">
-            <i class="bi bi-arrow-left me-1"></i> All Complaints Tasks
-        </a>
-
-        <div class="d-flex gap-3">
-            <div class="btn-group bg-white p-1 rounded-pill border">
-                <button class="btn btn-sm btn-dark rounded-pill px-3">List</button>
-                <button class="btn btn-sm btn-light rounded-pill px-3 text-muted">Calendar</button>
-            </div>
-
-            <form method="GET" class="position-relative">
-                <input type="text" name="q" class="form-control rounded-pill ps-4" placeholder="Search task..."
-                    value="{{ request.GET.q|default:'' }}">
-                <input type="hidden" name="status" value="{{ current_status }}">
-            </form>
-
-            <a href="{% url 'create_maintenance' %}" class="btn btn-dark rounded-pill px-4 d-flex align-items-center">
-                <i class="bi bi-plus-lg me-2"></i> Create Task
+            <a href="{% url 'complaint_tasks' %}" class="text-decoration-none text-muted mb-2 d-inline-block">
+                <i class="bi bi-arrow-left me-1"></i> All Complaints Tasks
             </a>
-        </div>
+
+            <div class="d-flex gap-3">
+                <div class="btn-group bg-white p-1 rounded-pill border">
+                    <button class="btn btn-sm btn-dark rounded-pill px-3">List</button>
+                    <button class="btn btn-sm btn-light rounded-pill px-3 text-muted">Calendar</button>
+                </div>
+
+                <form method="GET" class="position-relative">
+                    <input type="text" name="q" class="form-control rounded-pill ps-4" placeholder="Search task..."
+                        value="{{ request.GET.q|default:'' }}">
+                    <input type="hidden" name="status" value="{{ current_status }}">
+                </form>
+
+                <a href="{% url 'create_maintenance' %}"
+                    class="btn btn-dark rounded-pill px-4 d-flex align-items-center">
+                    <i class="bi bi-plus-lg me-2"></i> Create Task
+                </a>
+            </div>
     </div>
 
     <div class="d-flex gap-3 mb-4 overflow-auto">

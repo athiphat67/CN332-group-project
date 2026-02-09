@@ -70,6 +70,7 @@ class JuristicOfficer(models.Model):
         return f"Officer: {self.user.username}"
 
 class Security(models.Model):
+    is_on_duty = models.BooleanField(default=False, help_text="Status: On Duty or Off Duty")
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='security_profile')
     station_id = models.CharField(max_length=50)
     shift_time = models.CharField(max_length=50) # e.g. "08:00-16:00"

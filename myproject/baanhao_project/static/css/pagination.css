@@ -1,0 +1,49 @@
+/* --- Pagination Style Theme BaanHao --- */
+.page-link-custom {
+    color: #6c757d;
+    background: #fff;
+    border: none; /* ไม่มีขอบ */
+    min-width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px; /* มุมมน */
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.page-link-custom:hover {
+    background-color: #f8f9fa;
+    color: #5D4037; /* สีน้ำตาลตามธีม */
+    transform: translateY(-2px);
+}
+
+/* หน้าปัจจุบัน (Active) */
+.page-link-custom.active, 
+.page-item.active .page-link-custom {
+    background-color: #5D4037;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(93, 64, 55, 0.3);
+}
+
+/* ปุ่มที่กดไม่ได้ (Disabled) */
+.page-link-custom.disabled {
+    background-color: #e9ecef;
+    color: #adb5bd;
+    cursor: default;
+    box-shadow: none;
+}
+.page-link-custom.disabled:hover {
+    transform: none;
+}
+
+/* ลบจุด Bullet ของ list เดิม */
+.pagination {
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style: none;
+}

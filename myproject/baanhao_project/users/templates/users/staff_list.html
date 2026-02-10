@@ -1,196 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
 
-<style>
-    /* Theme Colors ตามรูป */
-    :root {
-        --baanhao-bg: #F0F5FA;      /* พื้นหลังสีฟ้าอ่อน */
-        --baanhao-brown: #5D4037;   /* สีน้ำตาลเข้มสำหรับปุ่ม Active */
-        --baanhao-cream: #FFFBF0;   /* สีครีม (เผื่อใช้) */
-        --text-dark: #333333;
-    }
+{% block title %}Staff Members - BaanHao{% endblock %}
 
-    body {
-        background-color: var(--baanhao-bg);
-        font-family: 'Poppins', sans-serif; /* แนะนำให้ใช้ Font นี้ถ้ามี */
-    }
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/staff_list.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pagination.css' %}">
+{% endblock %}
 
-    /* ปรับแต่งปุ่ม Filter */
-    .btn-filter {
-        background-color: #fff;
-        color: #999;
-        border: 1px solid #eee;
-        border-radius: 50px; /* pill shape */
-        transition: all 0.3s ease;
-    }
-    
-    .btn-filter:hover {
-        background-color: #f8f9fa;
-        color: var(--baanhao-brown);
-    }
+{% block content %}
+<div class="staff-page-container">
+    <div class="container-fluid">
+        
+        <div class="page-header">
+            <p class="page-subtitle">Admin Dashboard</p>
+            <h1 class="page-title">Staff Members</h1>
+        </div>
 
-    .btn-filter.active {
-        background-color: var(--baanhao-brown) !important;
-        color: #fff !important;
-        border-color: var(--baanhao-brown) !important;
-        box-shadow: 0 4px 6px rgba(93, 64, 55, 0.2);
-    }
+        <div class="filter-container">
+            <a href="?role=all" class="filter-btn {% if current_role == 'all' or not current_role %}active{% endif %}">
+                All Staff 
+                {% if current_role == 'all' or not current_role %}
+                    <span class="count-badge">{{ staffs.paginator.count }}</span>
+                {% endif %}
+            </a>
 
-    /* ปรับแต่ง Card */
-    .staff-card {
-        background: #fff;
-        border-radius: 20px;
-        transition: transform 0.2s, box-shadow 0.2s;
-        border: none;
-    }
-
-    .staff-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.05) !important;
-    }
-
-    /* รูปโปรไฟล์ */
-    .profile-img-container {
-        width: 100px;
-        height: 100px;
-        margin: 0 auto 1rem;
-    }
-
-    /* Badge ต่างๆ */
-    .role-badge {
-        background-color: #F3F4F6;
-        color: #6B7280;
-        font-weight: 500;
-    }
-
-    .status-badge {
-        background-color: rgba(25, 135, 84, 0.1);
-        color: #198754;
-        font-weight: 600;
-    }
-
-    /* Pagination */
-    .page-link-custom {
-        color: #6c757d;
-        background: #fff;
-        border: none;
-        margin: 0 5px;
-        border-radius: 8px;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .page-item.active .page-link-custom {
-        background-color: var(--baanhao-brown);
-        color: #fff;
-    }
-</style>
-
-<div class="container-fluid py-4" style="background-color: var(--baanhao-bg); min-height: 100vh;">
-
-    <div class="mb-4">
-        <p class="text-muted small mb-1">Admin Dashboard</p>
-        <h2 class="fw-bold text-dark">Staff Members</h2>
-    </div>
-
-    <div class="d-flex flex-wrap gap-2 mb-4">
-        <a href="?role=all" class="btn btn-filter px-4 py-2 fw-bold {% if current_role == 'all' %}active{% endif %}">
-            All Staff <span class="badge bg-white text-dark ms-2 rounded-pill">{{ all_count }}</span>
-        </a>
-        <a href="?role=juristic" class="btn btn-filter px-4 py-2 fw-bold {% if current_role == 'juristic' %}active{% endif %}">
-            <i class="bi bi-building me-2"></i> Juristic Officer
-        </a>
-        <a href="?role=technician" class="btn btn-filter px-4 py-2 fw-bold {% if current_role == 'technician' %}active{% endif %}">
-            <i class="bi bi-tools me-2"></i> Technician
-        </a>
-        <a href="?role=security" class="btn btn-filter px-4 py-2 fw-bold {% if current_role == 'security' %}active{% endif %}">
-            Security
-        </a>
-        <a href="?role=admin" class="btn btn-filter px-4 py-2 fw-bold {% if current_role == 'admin' %}active{% endif %}">
-            Admin
-        </a>
-    </div>
-
-    <div class="row g-4">
-        {% for staff in staffs %}
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-            <a href="{% url 'users:staff_detail' staff.id %}" class="text-decoration-none text-dark">
-                <div class="card staff-card shadow-sm h-100 text-center p-3 position-relative">
-                    
-                    <div class="position-absolute top-0 end-0 p-3">
-                        <span class="text-muted"><i class="bi bi-three-dots"></i></span>
-                    </div>
-
-                    <div class="card-body">
-                        <div class="profile-img-container mb-3">
-                            {% if staff.profile_image %}
-                            <img src="{{ staff.profile_image.url }}" class="rounded-circle w-100 h-100 object-fit-cover border">
-                            {% else %}
-                            <div class="rounded-circle bg-light w-100 h-100 d-flex align-items-center justify-content-center border">
-                                <i class="bi bi-image text-secondary fs-1"></i> 
-                            </div>
-                            {% endif %}
-                        </div>
-
-                        <h5 class="fw-bold mb-1">{{ staff.get_full_name|default:staff.username }}</h5>
-
-                        <span class="badge role-badge rounded-pill px-3 py-2 mb-3 text-uppercase">
-                            {{ staff.get_role_display }}
-                        </span>
-
-                        <div class="text-muted small mb-1">
-                            <i class="bi bi-telephone-fill me-1"></i> {{ staff.phone_number|default:"-" }}
-                        </div>
-                        <div class="text-muted small mb-3">
-                            <i class="bi bi-envelope-fill me-1"></i> {{ staff.email }}
-                        </div>
-
-                        <div>
-                            {% if staff.is_active %}
-                            <span class="badge status-badge rounded-pill px-3 py-2">
-                                <i class="bi bi-check-circle-fill me-1"></i> Active
-                            </span>
-                            {% else %}
-                            <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill px-3 py-2">
-                                <i class="bi bi-x-circle-fill me-1"></i> Inactive
-                            </span>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
+            <a href="?role=juristic" class="filter-btn {% if current_role == 'juristic' %}active{% endif %}">
+                <i class="bi bi-building me-2"></i> Juristic Officer
+            </a>
+            <a href="?role=technician" class="filter-btn {% if current_role == 'technician' %}active{% endif %}">
+                <i class="bi bi-tools me-2"></i> Technician
+            </a>
+            <a href="?role=security" class="filter-btn {% if current_role == 'security' %}active{% endif %}">
+                <i class="bi bi-shield-lock me-2"></i> Security
+            </a>
+            <a href="?role=admin" class="filter-btn {% if current_role == 'admin' %}active{% endif %}">
+                Admin
             </a>
         </div>
-        {% empty %}
-        <div class="col-12 text-center py-5">
-            <p class="text-muted">No staff found in this category.</p>
+
+        <div class="row g-4">
+            {% for staff in staffs %}
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                <div class="staff-card" onclick="window.location.href='{% url 'users:staff_detail' staff.id %}'">
+                    
+                    <div class="card-menu-btn">
+                        <i class="bi bi-three-dots"></i>
+                    </div>
+
+                    <div class="profile-image-box">
+                        {% if staff.profile_image %}
+                            <img src="{{ staff.profile_image.url }}" alt="Profile" class="profile-img">
+                        {% else %}
+                            <i class="bi bi-image text-secondary" style="font-size: 2rem;"></i>
+                        {% endif %}
+                    </div>
+
+                    <h5 class="staff-name">{{ staff.get_full_name|default:staff.username }}</h5>
+                    <span class="role-label">{{ staff.get_role_display|default:"Staff" }}</span>
+
+                    <div class="contact-info">
+                        <i class="bi bi-telephone-fill"></i>
+                        <span>{{ staff.phone_number|default:"-" }}</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="bi bi-envelope-fill"></i>
+                        <span>{{ staff.email }}</span>
+                    </div>
+
+                    {% if staff.is_active %}
+                    <div class="status-pill">
+                        <i class="bi bi-check-circle-fill"></i> Active
+                    </div>
+                    {% else %}
+                    <div class="status-pill" style="color: #dc3545; background-color: rgba(220, 53, 69, 0.1);">
+                        <i class="bi bi-x-circle-fill"></i> Inactive
+                    </div>
+                    {% endif %}
+
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 py-5 text-center">
+                <p class="text-muted">ไม่พบรายชื่อพนักงานในหมวดหมู่นี้</p>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
 
-    <div class="d-flex justify-content-center mt-5">
-        <nav>
-            <ul class="pagination align-items-center">
-                {% if staffs.has_previous %}
-                <li class="page-item">
-                    <a class="page-link-custom" href="?page={{ staffs.previous_page_number }}&role={{ current_role }}">
-                        <i class="bi bi-chevron-left"></i>
-                    </a>
-                </li>
-                {% endif %}
+        <div class="d-flex justify-content-center mt-5 mb-5">
+            {% include 'partials/pagination.html' with page_obj=staffs %}
+        </div>
 
-                <li class="page-item active">
-                    <span class="page-link-custom">{{ staffs.number }}</span>
-                </li>
-
-                {% if staffs.has_next %}
-                <li class="page-item">
-                    <a class="page-link-custom" href="?page={{ staffs.next_page_number }}&role={{ current_role }}">
-                        <i class="bi bi-chevron-right"></i>
-                    </a>
-                </li>
-                {% endif %}
-            </ul>
-        </nav>
     </div>
 </div>
+{% endblock %}

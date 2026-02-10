@@ -1,0 +1,145 @@
+
+<style>
+    :root {
+        --baanhao-bg: #F0F5FA;
+        --baanhao-brown: #5D4037;
+    }
+    body { background-color: var(--baanhao-bg); }
+
+    .detail-card {
+        max-width: 500px;
+        background: white;
+        border-radius: 30px;
+        padding: 40px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        position: relative;
+    }
+
+    .detail-profile-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 2px solid #eee;
+        padding: 5px;
+        object-fit: cover;
+    }
+
+    .btn-edit-icon {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6c757d;
+        transition: 0.2s;
+    }
+    .btn-edit-icon:hover {
+        background-color: #e9ecef;
+        color: var(--baanhao-brown);
+    }
+
+    .info-badge {
+        background-color: #F3F4F6;
+        color: #6B7280;
+        padding: 5px 20px;
+        border-radius: 50px;
+        font-size: 0.9rem;
+    }
+
+    .status-large {
+        background-color: rgba(25, 135, 84, 0.1);
+        color: #198754;
+        font-weight: 600;
+        padding: 10px 30px;
+        border-radius: 50px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .nav-link-custom {
+        color: #999;
+        text-decoration: none;
+        font-weight: 600;
+        transition: 0.2s;
+    }
+    .nav-link-custom:hover {
+        color: var(--baanhao-brown);
+    }
+</style>
+
+<div class="container-fluid py-4" style="min-height: 100vh;">
+    
+    <div class="mb-4">
+        <a href="{% url 'users:staff_list' %}" class="text-decoration-none text-muted fw-bold">
+            <i class="bi bi-chevron-left me-1"></i> Back to List
+        </a>
+    </div>
+
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 70vh;">
+        
+        <div class="detail-card w-100 text-center mb-5">
+            <a href="#" class="btn-edit-icon text-decoration-none">
+                <i class="bi bi-pencil-fill"></i>
+            </a>
+
+            <div class="mb-4">
+                {% if staff.profile_image %}
+                    <img src="{{ staff.profile_image.url }}" class="detail-profile-img">
+                {% else %}
+                    <div class="detail-profile-img d-flex align-items-center justify-content-center bg-light mx-auto text-secondary">
+                        <i class="bi bi-image fs-1"></i>
+                    </div>
+                {% endif %}
+            </div>
+
+            <h3 class="fw-bold mb-2">{{ staff.get_full_name|default:staff.username }}</h3>
+            
+            <div class="mb-4">
+                <span class="info-badge text-uppercase">{{ staff.get_role_display }}</span>
+            </div>
+
+            <div class="text-muted mb-2">
+                <i class="bi bi-telephone-fill me-2"></i> {{ staff.phone_number|default:"-" }}
+            </div>
+            <div class="text-muted mb-4">
+                <i class="bi bi-envelope-fill me-2"></i> {{ staff.email }}
+            </div>
+
+            <div>
+                {% if staff.is_active %}
+                <span class="status-large">
+                    <i class="bi bi-check-circle-fill"></i> Active
+                </span>
+                {% else %}
+                <span class="status-large bg-danger bg-opacity-10 text-danger">
+                    <i class="bi bi-x-circle-fill"></i> Inactive
+                </span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between w-100" style="max-width: 500px;">
+            <div>
+                {% if previous_staff %}
+                <a href="{% url 'users:staff_detail' previous_staff.id %}" class="nav-link-custom">
+                    <i class="bi bi-chevron-left"></i> Previous
+                </a>
+                {% endif %}
+            </div>
+            <div>
+                {% if next_staff %}
+                <a href="{% url 'users:staff_detail' next_staff.id %}" class="nav-link-custom">
+                    Next <i class="bi bi-chevron-right"></i>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+</div>

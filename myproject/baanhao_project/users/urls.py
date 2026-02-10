@@ -7,6 +7,7 @@ app_name = 'users'
 urlpatterns = [
     # Staff list
     path('staff/', views.staff_list, name='staff_list'),
+    path('staff/<int:staff_id>/', views.staff_detail, name='staff_detail'),
     
     # Authentication
     path('login/', views.login_view, name='login'),

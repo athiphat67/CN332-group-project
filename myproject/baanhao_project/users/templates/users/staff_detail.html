@@ -1,145 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
 
-<style>
-    :root {
-        --baanhao-bg: #F0F5FA;
-        --baanhao-brown: #5D4037;
-    }
-    body { background-color: var(--baanhao-bg); }
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/staff_detail.css' %}">
+{% endblock %}
 
-    .detail-card {
-        max-width: 500px;
-        background: white;
-        border-radius: 30px;
-        padding: 40px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        position: relative;
-    }
-
-    .detail-profile-img {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        border: 2px solid #eee;
-        padding: 5px;
-        object-fit: cover;
-    }
-
-    .btn-edit-icon {
-        position: absolute;
-        top: 30px;
-        right: 30px;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: #f8f9fa;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #6c757d;
-        transition: 0.2s;
-    }
-    .btn-edit-icon:hover {
-        background-color: #e9ecef;
-        color: var(--baanhao-brown);
-    }
-
-    .info-badge {
-        background-color: #F3F4F6;
-        color: #6B7280;
-        padding: 5px 20px;
-        border-radius: 50px;
-        font-size: 0.9rem;
-    }
-
-    .status-large {
-        background-color: rgba(25, 135, 84, 0.1);
-        color: #198754;
-        font-weight: 600;
-        padding: 10px 30px;
-        border-radius: 50px;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .nav-link-custom {
-        color: #999;
-        text-decoration: none;
-        font-weight: 600;
-        transition: 0.2s;
-    }
-    .nav-link-custom:hover {
-        color: var(--baanhao-brown);
-    }
-</style>
-
-<div class="container-fluid py-4" style="min-height: 100vh;">
-    
-    <div class="mb-4">
-        <a href="{% url 'users:staff_list' %}" class="text-decoration-none text-muted fw-bold">
-            <i class="bi bi-chevron-left me-1"></i> Back to List
-        </a>
-    </div>
-
-    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 70vh;">
+{% block content %}
+<div class="staff-detail-container">
+    <div class="container-fluid">
         
-        <div class="detail-card w-100 text-center mb-5">
-            <a href="#" class="btn-edit-icon text-decoration-none">
-                <i class="bi bi-pencil-fill"></i>
-            </a>
+        <a href="{% url 'users:staff_list' %}" class="back-btn">
+            <i class="bi bi-arrow-left me-2"></i> Back to Staff List
+        </a>
 
-            <div class="mb-4">
-                {% if staff.profile_image %}
-                    <img src="{{ staff.profile_image.url }}" class="detail-profile-img">
-                {% else %}
-                    <div class="detail-profile-img d-flex align-items-center justify-content-center bg-light mx-auto text-secondary">
-                        <i class="bi bi-image fs-1"></i>
-                    </div>
-                {% endif %}
-            </div>
-
-            <h3 class="fw-bold mb-2">{{ staff.get_full_name|default:staff.username }}</h3>
+        <div class="row g-4">
             
-            <div class="mb-4">
-                <span class="info-badge text-uppercase">{{ staff.get_role_display }}</span>
+            <div class="col-lg-4 col-xl-3">
+                <div class="profile-card">
+                    {% if staff.profile_image %}
+                        <img src="{{ staff.profile_image.url }}" alt="User Profile" class="big-profile-img">
+                    {% else %}
+                        <img src="https://ui-avatars.com/api/?name={{ staff.username }}&background=random" alt="Default" class="big-profile-img">
+                    {% endif %}
+
+                    <h2 class="staff-fullname">{{ staff.get_full_name|default:staff.username }}</h2>
+                    <span class="staff-role-badge">{{ staff.get_role_display }}</span>
+
+                    <div class="mt-2">
+                        {% if staff.is_active %}
+                            <span class="text-success fw-bold"><i class="bi bi-circle-fill" style="font-size: 8px;"></i> Active</span>
+                        {% else %}
+                            <span class="text-danger fw-bold"><i class="bi bi-circle-fill" style="font-size: 8px;"></i> Inactive</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="action-btn-group">
+                        <button class="btn btn-edit">
+                            <i class="bi bi-pencil-square me-2"></i>Edit
+                        </button>
+                        <button class="btn btn-delete">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
 
-            <div class="text-muted mb-2">
-                <i class="bi bi-telephone-fill me-2"></i> {{ staff.phone_number|default:"-" }}
-            </div>
-            <div class="text-muted mb-4">
-                <i class="bi bi-envelope-fill me-2"></i> {{ staff.email }}
-            </div>
+            <div class="col-lg-8 col-xl-9">
+                
+                <div class="info-card">
+                    <h5 class="card-title-custom">General Information</h5>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="info-row">
+                                <span class="info-label">Full Name</span>
+                                <span class="info-value">{{ staff.first_name }} {{ staff.last_name }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Email</span>
+                                <span class="info-value">{{ staff.email }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Phone</span>
+                                <span class="info-value">{{ staff.phone_number|default:"-" }}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-row">
+                                <span class="info-label">Position</span>
+                                <span class="info-value">{{ staff.get_role_display }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Joined Date</span>
+                                <span class="info-value">{{ staff.date_joined|date:"d M Y" }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Last Login</span>
+                                <span class="info-value">{{ staff.last_login|date:"d M Y, H:i" }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <div>
-                {% if staff.is_active %}
-                <span class="status-large">
-                    <i class="bi bi-check-circle-fill"></i> Active
-                </span>
-                {% else %}
-                <span class="status-large bg-danger bg-opacity-10 text-danger">
-                    <i class="bi bi-x-circle-fill"></i> Inactive
-                </span>
-                {% endif %}
+                <div class="info-card">
+                    <h5 class="card-title-custom">Recent Tasks</h5>
+                    
+                    <div class="task-item">
+                        <div class="task-icon">
+                            <i class="bi bi-wrench"></i>
+                        </div>
+                        <div class="task-info">
+                            <h6>ซ่อมท่อประปา อาคาร 3</h6>
+                            <span>Assigned: 10 Dec 2025</span>
+                        </div>
+                        <span class="task-status">Completed</span>
+                    </div>
+
+                    <div class="task-item">
+                        <div class="task-icon" style="background-color: #E3F2FD; color: #1976D2;">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <div class="task-info">
+                            <h6>ตรวจสอบความปลอดภัยกะดึก</h6>
+                            <span>Assigned: 12 Dec 2025</span>
+                        </div>
+                        <span class="task-status" style="background-color: #FFF3E0; color: #E65100;">In Progress</span>
+                    </div>
+
+                </div>
+
             </div>
         </div>
-
-        <div class="d-flex justify-content-between w-100" style="max-width: 500px;">
-            <div>
-                {% if previous_staff %}
-                <a href="{% url 'users:staff_detail' previous_staff.id %}" class="nav-link-custom">
-                    <i class="bi bi-chevron-left"></i> Previous
-                </a>
-                {% endif %}
-            </div>
-            <div>
-                {% if next_staff %}
-                <a href="{% url 'users:staff_detail' next_staff.id %}" class="nav-link-custom">
-                    Next <i class="bi bi-chevron-right"></i>
-                </a>
-                {% endif %}
-            </div>
-        </div>
-
     </div>
 </div>
+{% endblock %}

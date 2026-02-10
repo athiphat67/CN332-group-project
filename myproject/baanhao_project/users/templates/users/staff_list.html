@@ -1,33 +1,113 @@
-<div class="container-fluid py-4" style="background-color: #F8FAFC;">
+
+<style>
+    /* Theme Colors ตามรูป */
+    :root {
+        --baanhao-bg: #F0F5FA;      /* พื้นหลังสีฟ้าอ่อน */
+        --baanhao-brown: #5D4037;   /* สีน้ำตาลเข้มสำหรับปุ่ม Active */
+        --baanhao-cream: #FFFBF0;   /* สีครีม (เผื่อใช้) */
+        --text-dark: #333333;
+    }
+
+    body {
+        background-color: var(--baanhao-bg);
+        font-family: 'Poppins', sans-serif; /* แนะนำให้ใช้ Font นี้ถ้ามี */
+    }
+
+    /* ปรับแต่งปุ่ม Filter */
+    .btn-filter {
+        background-color: #fff;
+        color: #999;
+        border: 1px solid #eee;
+        border-radius: 50px; /* pill shape */
+        transition: all 0.3s ease;
+    }
+    
+    .btn-filter:hover {
+        background-color: #f8f9fa;
+        color: var(--baanhao-brown);
+    }
+
+    .btn-filter.active {
+        background-color: var(--baanhao-brown) !important;
+        color: #fff !important;
+        border-color: var(--baanhao-brown) !important;
+        box-shadow: 0 4px 6px rgba(93, 64, 55, 0.2);
+    }
+
+    /* ปรับแต่ง Card */
+    .staff-card {
+        background: #fff;
+        border-radius: 20px;
+        transition: transform 0.2s, box-shadow 0.2s;
+        border: none;
+    }
+
+    .staff-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05) !important;
+    }
+
+    /* รูปโปรไฟล์ */
+    .profile-img-container {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 1rem;
+    }
+
+    /* Badge ต่างๆ */
+    .role-badge {
+        background-color: #F3F4F6;
+        color: #6B7280;
+        font-weight: 500;
+    }
+
+    .status-badge {
+        background-color: rgba(25, 135, 84, 0.1);
+        color: #198754;
+        font-weight: 600;
+    }
+
+    /* Pagination */
+    .page-link-custom {
+        color: #6c757d;
+        background: #fff;
+        border: none;
+        margin: 0 5px;
+        border-radius: 8px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .page-item.active .page-link-custom {
+        background-color: var(--baanhao-brown);
+        color: #fff;
+    }
+</style>
+
+<div class="container-fluid py-4" style="background-color: var(--baanhao-bg); min-height: 100vh;">
 
     <div class="mb-4">
         <p class="text-muted small mb-1">Admin Dashboard</p>
-
-        <a href="{% url 'dashboard' %}" class="text-decoration-none text-muted mb-2 d-inline-block">
-            <i class="bi bi-arrow-left me-1"></i> Back to Dashboard
-        </a>
-        <h2 class="fw-bold">Staff Members</h2>
+        <h2 class="fw-bold text-dark">Staff Members</h2>
     </div>
 
-    <div class="d-flex gap-2 mb-4 overflow-auto">
-        <a href="?role=all" class="btn rounded-pill px-4 py-2 fw-bold 
-           {% if current_role == 'all' %}btn-dark{% else %}btn-white text-muted border{% endif %}">
-            All Staff <span class="badge bg-secondary ms-2 rounded-pill">{{ all_count }}</span>
+    <div class="d-flex flex-wrap gap-2 mb-4">
+        <a href="?role=all" class="btn btn-filter px-4 py-2 fw-bold {% if current_role == 'all' %}active{% endif %}">
+            All Staff <span class="badge bg-white text-dark ms-2 rounded-pill">{{ all_count }}</span>
         </a>
-        <a href="?role=juristic" class="btn rounded-pill px-4 py-2 fw-bold 
-           {% if current_role == 'juristic' %}btn-dark{% else %}btn-white text-muted border{% endif %}">
+        <a href="?role=juristic" class="btn btn-filter px-4 py-2 fw-bold {% if current_role == 'juristic' %}active{% endif %}">
             <i class="bi bi-building me-2"></i> Juristic Officer
         </a>
-        <a href="?role=technician" class="btn rounded-pill px-4 py-2 fw-bold 
-           {% if current_role == 'technician' %}btn-dark{% else %}btn-white text-muted border{% endif %}">
+        <a href="?role=technician" class="btn btn-filter px-4 py-2 fw-bold {% if current_role == 'technician' %}active{% endif %}">
             <i class="bi bi-tools me-2"></i> Technician
         </a>
-        <a href="?role=security" class="btn rounded-pill px-4 py-2 fw-bold 
-           {% if current_role == 'security' %}btn-dark{% else %}btn-white text-muted border{% endif %}">
+        <a href="?role=security" class="btn btn-filter px-4 py-2 fw-bold {% if current_role == 'security' %}active{% endif %}">
             Security
         </a>
-        <a href="?role=admin" class="btn rounded-pill px-4 py-2 fw-bold 
-           {% if current_role == 'admin' %}btn-dark{% else %}btn-white text-muted border{% endif %}">
+        <a href="?role=admin" class="btn btn-filter px-4 py-2 fw-bold {% if current_role == 'admin' %}active{% endif %}">
             Admin
         </a>
     </div>
@@ -35,52 +115,51 @@
     <div class="row g-4">
         {% for staff in staffs %}
         <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-            <div class="card border-0 shadow-sm rounded-4 h-100 text-center p-3 position-relative">
+            <a href="{% url 'users:staff_detail' staff.id %}" class="text-decoration-none text-dark">
+                <div class="card staff-card shadow-sm h-100 text-center p-3 position-relative">
+                    
+                    <div class="position-absolute top-0 end-0 p-3">
+                        <span class="text-muted"><i class="bi bi-three-dots"></i></span>
+                    </div>
 
-                <div class="position-absolute top-0 end-0 p-3">
-                    <a href="#" class="text-muted"><i class="bi bi-three-dots"></i></a>
-                </div>
-
-                <div class="card-body">
-                    <div class="mb-3 mx-auto" style="width: 80px; height: 80px;">
-                        {% if staff.profile_image %}
-                        <img src="{{ staff.profile_image.url }}"
-                            class="rounded-circle w-100 h-100 object-fit-cover border">
-                        {% else %}
-                        <div
-                            class="rounded-circle bg-light w-100 h-100 d-flex align-items-center justify-content-center border">
-                            <i class="bi bi-person text-secondary fs-1"></i>
+                    <div class="card-body">
+                        <div class="profile-img-container mb-3">
+                            {% if staff.profile_image %}
+                            <img src="{{ staff.profile_image.url }}" class="rounded-circle w-100 h-100 object-fit-cover border">
+                            {% else %}
+                            <div class="rounded-circle bg-light w-100 h-100 d-flex align-items-center justify-content-center border">
+                                <i class="bi bi-image text-secondary fs-1"></i> 
+                            </div>
+                            {% endif %}
                         </div>
-                        {% endif %}
-                    </div>
 
-                    <h5 class="fw-bold mb-1">{{ staff.get_full_name|default:staff.username }}</h5>
+                        <h5 class="fw-bold mb-1">{{ staff.get_full_name|default:staff.username }}</h5>
 
-                    <span class="badge bg-light text-secondary border rounded-pill px-3 mb-3 text-uppercase">
-                        {{ staff.get_role_display }}
-                    </span>
-
-                    <div class="text-muted small mb-1">
-                        <i class="bi bi-telephone-fill me-1"></i> {{ staff.phone_number|default:"-" }}
-                    </div>
-                    <div class="text-muted small mb-3">
-                        <i class="bi bi-envelope-fill me-1"></i> {{ staff.email }}
-                    </div>
-
-                    <div>
-                        {% if staff.is_active %}
-                        <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-2">
-                            <i class="bi bi-check-circle-fill me-1"></i> Active
+                        <span class="badge role-badge rounded-pill px-3 py-2 mb-3 text-uppercase">
+                            {{ staff.get_role_display }}
                         </span>
-                        {% else %}
-                        <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill px-3 py-2">
-                            <i class="bi bi-x-circle-fill me-1"></i> Inactive
-                        </span>
-                        {% endif %}
+
+                        <div class="text-muted small mb-1">
+                            <i class="bi bi-telephone-fill me-1"></i> {{ staff.phone_number|default:"-" }}
+                        </div>
+                        <div class="text-muted small mb-3">
+                            <i class="bi bi-envelope-fill me-1"></i> {{ staff.email }}
+                        </div>
+
+                        <div>
+                            {% if staff.is_active %}
+                            <span class="badge status-badge rounded-pill px-3 py-2">
+                                <i class="bi bi-check-circle-fill me-1"></i> Active
+                            </span>
+                            {% else %}
+                            <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill px-3 py-2">
+                                <i class="bi bi-x-circle-fill me-1"></i> Inactive
+                            </span>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
-
-            </div>
+            </a>
         </div>
         {% empty %}
         <div class="col-12 text-center py-5">
@@ -91,24 +170,22 @@
 
     <div class="d-flex justify-content-center mt-5">
         <nav>
-            <ul class="pagination">
+            <ul class="pagination align-items-center">
                 {% if staffs.has_previous %}
                 <li class="page-item">
-                    <a class="page-link border-0 rounded-3 mx-1 text-muted"
-                        href="?page={{ staffs.previous_page_number }}&role={{ current_role }}">
+                    <a class="page-link-custom" href="?page={{ staffs.previous_page_number }}&role={{ current_role }}">
                         <i class="bi bi-chevron-left"></i>
                     </a>
                 </li>
                 {% endif %}
 
                 <li class="page-item active">
-                    <span class="page-link border-0 rounded-3 mx-1 bg-dark text-white">{{ staffs.number }}</span>
+                    <span class="page-link-custom">{{ staffs.number }}</span>
                 </li>
 
                 {% if staffs.has_next %}
                 <li class="page-item">
-                    <a class="page-link border-0 rounded-3 mx-1 text-muted"
-                        href="?page={{ staffs.next_page_number }}&role={{ current_role }}">
+                    <a class="page-link-custom" href="?page={{ staffs.next_page_number }}&role={{ current_role }}">
                         <i class="bi bi-chevron-right"></i>
                     </a>
                 </li>
@@ -116,5 +193,4 @@
             </ul>
         </nav>
     </div>
-
 </div>

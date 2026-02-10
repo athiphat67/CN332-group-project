@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import User, UserRole
+from django.shortcuts import get_object_or_404
 
 def login_view(request):
     """Handle user login"""
@@ -63,3 +64,27 @@ def staff_list(request):
     }
 
     return render(request, 'users/staff_list.html', context)
+
+def staff_detail(request, staff_id):
+    # ดึง User ที่ระบุ
+    staff = get_object_or_404(User, id=staff_id)
+    
+    # Logic หา Previous/Next staff (โดยเรียงตาม role, first_name เหมือนหน้า list)
+    # หมายเหตุ: วิธีนี้เป็นแบบพื้นฐาน ถ้า User เยอะมากอาจต้องปรับ Logic
+    all_staff = User.objects.exclude(role=UserRole.RESIDENT).order_by('role', 'first_name')
+    staff_list = list(all_staff)
+    
+    try:
+        current_index = staff_list.index(staff)
+        previous_staff = staff_list[current_index - 1] if current_index > 0 else None
+        next_staff = staff_list[current_index + 1] if current_index < len(staff_list) - 1 else None
+    except ValueError:
+        previous_staff = None
+        next_staff = None
+
+    context = {
+        'staff': staff,
+        'previous_staff': previous_staff,
+        'next_staff': next_staff,
+    }
+    return render(request, 'users/staff_detail.html', context)

@@ -4,7 +4,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import User, UserRole
 from django.shortcuts import get_object_or_404
-from django.utils import timezone
 
 def login_view(request):
     """Handle user login"""
@@ -89,25 +88,3 @@ def staff_detail(request, staff_id):
         'next_staff': next_staff,
     }
     return render(request, 'users/staff_detail.html', context)
-
-def dashboard_view(request):
-    context = {
-        'waiting_count': 12,
-        'progress_count': 34,
-        'overdue_count': 5,
-        'completed_count': 58,
-        'last_update': timezone.now().strftime('%d/%m/%Y %I:%M %p'),
-        'road_count': 10,
-        'electric_count': 7,
-        'water_count': 5,
-        'maintenance_total': 22,
-        'chart_labels': ['Jan','Feb','Mar','Apr','May','Jun'],
-        'chart_data': [5, 12, 8, 20, 15, 25],
-    }
-    return render(request, 'templates/dashboard/dashboard.html', context)
-
-def all_tasks_view(request):
-    return render(request, 'tasks/all_tasks.html')
-
-def analytics_view(request):
-    return render(request, "analytics/analytics.html")

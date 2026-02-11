@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'notifications/notifications.css' %}">
+
+<div class="container-fluid py-4">
+    <div class="row">
+
+        <!-- LEFT CONTENT -->
+        <div class="col-lg-9">
+            <h6 class="text-muted">Admin notification</h6>
+            <h2 class="fw-bold mb-4">Notification</h2>
+
+            <div class="card shadow-sm p-4 rounded-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-semibold">New for you!</h5>
+                    <a href="#" class="text-decoration-none">Mark as all read</a>
+                </div>
+
+                <!-- Notification List -->
+                {% for i in "123456789"|make_list %}
+                <div class="notification-item mb-3 d-flex justify-content-between align-items-center">
+
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="notif-icon bg-light rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="bi bi-person-workspace"></i>
+                        </div>
+
+                        <div>
+                            <div class="fw-semibold">
+                                TASK#133 (Receive) : Pump Configuration
+                            </div>
+                            <small class="text-muted">
+                                Mark Gonzales - Technician · 13 Nov
+                            </small>
+                        </div>
+                    </div>
+
+                    <i class="bi bi-check2 text-success fs-5"></i>
+
+                </div>
+                {% endfor %}
+
+                <!-- Pagination -->
+                <nav class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled"><a class="page-link">‹</a></li>
+                        <li class="page-item active"><a class="page-link">1</a></li>
+                        <li class="page-item"><a class="page-link">2</a></li>
+                        <li class="page-item"><a class="page-link">3</a></li>
+                        <li class="page-item"><a class="page-link">4</a></li>
+                        <li class="page-item"><a class="page-link">40</a></li>
+                        <li class="page-item"><a class="page-link">›</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+
+        <!-- RIGHT FILTER PANEL -->
+        <div class="col-lg-3">
+
+            <div class="card shadow-sm p-4 rounded-4">
+
+                <h6 class="fw-bold mb-3">Filter</h6>
+
+                <!-- Category -->
+                <div class="mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" checked>
+                        <label class="form-check-label">Electrical System</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" checked>
+                        <label class="form-check-label">Plumbing & Sanitation</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" checked>
+                        <label class="form-check-label">Road</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" checked>
+                        <label class="form-check-label">Structural & Surfaces</label>
+                    </div>
+                </div>
+
+                <!-- Priority -->
+                <h6 class="fw-semibold">Priority status</h6>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="priority" checked>
+                    <label class="form-check-label">Urgent</label>
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="radio" name="priority">
+                    <label class="form-check-label">Normal</label>
+                </div>
+
+                <!-- Progress -->
+                <h6 class="fw-semibold">Progress status</h6>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="progress" checked>
+                    <label class="form-check-label">On progress</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="progress">
+                    <label class="form-check-label">Overdue</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="progress">
+                    <label class="form-check-label">Receive</label>
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="radio" name="progress">
+                    <label class="form-check-label">Closed</label>
+                </div>
+
+                <!-- Time -->
+                <h6 class="fw-semibold">Time-Based filter</h6>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="time" checked>
+                    <label class="form-check-label">This week</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="time">
+                    <label class="form-check-label">Date ranged</label>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

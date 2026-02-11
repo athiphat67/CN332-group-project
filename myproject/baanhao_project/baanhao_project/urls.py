@@ -33,4 +33,7 @@ urlpatterns = [
 
     # analytics
     path("analytics/", include("analytics.urls")),
+
+    #notifications
+    path('notifications/', include('notifications.urls')),
 ]

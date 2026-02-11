@@ -31,10 +31,10 @@
         <a class="sidebar-link {% if request.resolver_match.url_name == 'all_tasks' %}active{% endif %}" href="{% url 'all_tasks' %}">
             <i class="bi bi-list-task"></i> All Tasks
         </a>
-        <a class="sidebar-link" href="#">
+        <a class="sidebar-link {% if request.resolver_match.url_name == 'notifications' %}active{% endif %}" href="{% url 'notifications' %}">
             <i class="bi bi-bell-fill"></i> Notifications
         </a>
-        <a class="sidebar-link" href="#">
+        <a class="sidebar-link nav-link" href="{% url 'analytic' %}">
             <i class="bi bi-pie-chart-fill"></i> Analytics
         </a>
         <a class="sidebar-link" href="{% url 'users:staff_list' %}">

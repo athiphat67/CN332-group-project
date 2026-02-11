@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'properties',
     'issues',
     'dashboard',
+    'analytics',
 ]
 
 MIDDLEWARE = [

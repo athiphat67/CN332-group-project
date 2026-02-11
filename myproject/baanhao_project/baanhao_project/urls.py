@@ -30,4 +30,7 @@ urlpatterns = [
     
     # Users
     path('users/', include('users.urls')),
+
+    # analytics
+    path("analytics/", include("analytics.urls")),
 ]

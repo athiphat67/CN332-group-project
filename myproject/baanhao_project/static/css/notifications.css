@@ -6,11 +6,11 @@
 }
 
 .notification-item:hover {
-    background: #eef1f4;
-    transform: translateY(-2px);
+    background-color: #f8f9fa;
+    transition: 0.2s;
 }
 
-.notif-icon {
+.notification-icon {
     width: 45px;
     height: 45px;
     font-size: 18px;

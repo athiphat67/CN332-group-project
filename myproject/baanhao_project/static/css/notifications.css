@@ -1,0 +1,21 @@
+.notification-item {
+    padding: 15px;
+    border-radius: 14px;
+    background: #f8f9fa;
+    transition: 0.3s ease;
+}
+
+.notification-item:hover {
+    background-color: #f8f9fa;
+    transition: 0.2s;
+}
+
+.notification-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+}
+
+.card {
+    border: none;
+}

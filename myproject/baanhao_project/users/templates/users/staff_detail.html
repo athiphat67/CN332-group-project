@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/staff_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="staff-detail-container">
+    <div class="container-fluid">
+        
+        <a href="{% url 'users:staff_list' %}" class="back-btn">
+            <i class="bi bi-arrow-left me-2"></i> Back to Staff List
+        </a>
+
+        <div class="row g-4">
+            
+            <div class="col-lg-4 col-xl-3">
+                <div class="profile-card">
+                    {% if staff.profile_image %}
+                        <img src="{{ staff.profile_image.url }}" alt="User Profile" class="big-profile-img">
+                    {% else %}
+                        <img src="https://ui-avatars.com/api/?name={{ staff.username }}&background=random" alt="Default" class="big-profile-img">
+                    {% endif %}
+
+                    <h2 class="staff-fullname">{{ staff.get_full_name|default:staff.username }}</h2>
+                    <span class="staff-role-badge">{{ staff.get_role_display }}</span>
+
+                    <div class="mt-2">
+                        {% if staff.is_active %}
+                            <span class="text-success fw-bold"><i class="bi bi-circle-fill" style="font-size: 8px;"></i> Active</span>
+                        {% else %}
+                            <span class="text-danger fw-bold"><i class="bi bi-circle-fill" style="font-size: 8px;"></i> Inactive</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="action-btn-group">
+                        <button class="btn btn-edit">
+                            <i class="bi bi-pencil-square me-2"></i>Edit
+                        </button>
+                        <button class="btn btn-delete">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8 col-xl-9">
+                
+                <div class="info-card">
+                    <h5 class="card-title-custom">General Information</h5>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="info-row">
+                                <span class="info-label">Full Name</span>
+                                <span class="info-value">{{ staff.first_name }} {{ staff.last_name }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Email</span>
+                                <span class="info-value">{{ staff.email }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Phone</span>
+                                <span class="info-value">{{ staff.phone_number|default:"-" }}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-row">
+                                <span class="info-label">Position</span>
+                                <span class="info-value">{{ staff.get_role_display }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Joined Date</span>
+                                <span class="info-value">{{ staff.date_joined|date:"d M Y" }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Last Login</span>
+                                <span class="info-value">{{ staff.last_login|date:"d M Y, H:i" }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h5 class="card-title-custom">Recent Tasks</h5>
+                    
+                    <div class="task-item">
+                        <div class="task-icon">
+                            <i class="bi bi-wrench"></i>
+                        </div>
+                        <div class="task-info">
+                            <h6>ซ่อมท่อประปา อาคาร 3</h6>
+                            <span>Assigned: 10 Dec 2025</span>
+                        </div>
+                        <span class="task-status">Completed</span>
+                    </div>
+
+                    <div class="task-item">
+                        <div class="task-icon" style="background-color: #E3F2FD; color: #1976D2;">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <div class="task-info">
+                            <h6>ตรวจสอบความปลอดภัยกะดึก</h6>
+                            <span>Assigned: 12 Dec 2025</span>
+                        </div>
+                        <span class="task-status" style="background-color: #FFF3E0; color: #E65100;">In Progress</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

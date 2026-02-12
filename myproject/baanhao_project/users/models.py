@@ -70,6 +70,7 @@ class JuristicOfficer(models.Model):
         return f"Officer: {self.user.username}"
 
 class Security(models.Model):
+    is_on_duty = models.BooleanField(default=False, help_text="Status: On Duty or Off Duty")
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='security_profile')
     station_id = models.CharField(max_length=50)
     shift_time = models.CharField(max_length=50) # e.g. "08:00-16:00"
@@ -77,3 +78,19 @@ class Security(models.Model):
 class Admin(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='admin_profile')
     permission_level = models.CharField(max_length=20) # Diagram: Enum
+
+# Registration Request
+class RequestStatus(models.TextChoices):
+    PENDING = 'PENDING', _('Pending')
+    APPROVED = 'APPROVED', _('Approved')
+    REJECTED = 'REJECTED', _('Rejected')
+
+class RegistrationRequest(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='registration_request')
+    status = models.CharField(max_length=20, choices=RequestStatus.choices, default=RequestStatus.PENDING)
+    created_at = models.DateTimeField(auto_now_add=True)
+    reviewed_at = models.DateTimeField(null=True, blank=True)
+    reviewed_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='reviewed_requests')
+
+    def __str__(self):
+        return f"Registration: {self.user.username} ({self.get_status_display()})"

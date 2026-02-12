@@ -1,0 +1,359 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pending Registrations - Baan Hao Smart Living</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            background: #f5f6fa;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 30px 40px;
+            color: #fff;
+        }
+
+        .page-header h1 {
+            font-size: 26px;
+            font-weight: 600;
+        }
+
+        .page-header p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 5px;
+        }
+
+        .header-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Messages */
+        .alert {
+            padding: 14px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .alert-success {
+            background: #E8F5E9;
+            border: 1px solid #C8E6C9;
+            color: #2E7D32;
+        }
+
+        .alert-error {
+            background: #FFEBEE;
+            border: 1px solid #FFCDD2;
+            color: #C62828;
+        }
+
+        /* Stats */
+        .stats-bar {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px 28px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            flex: 1;
+            text-align: center;
+        }
+
+        .stat-card .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #7C4DFF;
+        }
+
+        .stat-card .stat-label {
+            font-size: 13px;
+            color: #9E9E9E;
+            margin-top: 4px;
+        }
+
+        /* Table */
+        .table-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+        .table-card table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-card th {
+            background: #f8f9fa;
+            padding: 16px 20px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #9E9E9E;
+            letter-spacing: 0.5px;
+        }
+
+        .table-card td {
+            padding: 18px 20px;
+            border-top: 1px solid #f0f0f0;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .table-card tr:hover td {
+            background: #fafafa;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7C4DFF, #448AFF);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .user-name {
+            font-weight: 500;
+        }
+
+        .user-email {
+            font-size: 12px;
+            color: #9E9E9E;
+        }
+
+        .badge-pending {
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            background: #FFF3E0;
+            color: #E65100;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 8px 18px;
+            border: none;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-approve {
+            background: linear-gradient(135deg, #66BB6A, #43A047);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-approve:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-reject {
+            background: linear-gradient(135deg, #EF5350, #E53935);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(244, 67, 54, 0.3);
+        }
+
+        .btn-reject:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(244, 67, 54, 0.4);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #9E9E9E;
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: #E0E0E0;
+        }
+
+        .empty-state p {
+            font-size: 15px;
+        }
+
+        .date-text {
+            font-size: 13px;
+            color: #757575;
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 20px;
+            }
+
+            .stats-bar {
+                flex-direction: column;
+            }
+
+            .table-card {
+                overflow-x: auto;
+            }
+
+            .action-btns {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-header">
+        <div class="header-actions">
+            <div>
+                <h1><i class="fas fa-user-clock"></i> Pending Registrations</h1>
+                <p>อนุมัติหรือปฏิเสธการสมัครสมาชิกใหม่</p>
+            </div>
+            <a href="{% url 'dashboard' %}" class="back-link">
+                <i class="fas fa-arrow-left"></i> กลับไปหน้า Dashboard
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-error{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-number">{{ pending_requests|length }}</div>
+                <div class="stat-label">รอการอนุมัติ</div>
+            </div>
+        </div>
+
+        <div class="table-card">
+            {% if pending_requests %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ผู้สมัคร</th>
+                        <th>เบอร์โทร</th>
+                        <th>วันที่สมัคร</th>
+                        <th>สถานะ</th>
+                        <th>จัดการ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for req in pending_requests %}
+                    <tr>
+                        <td>
+                            <div class="user-info">
+                                <div class="user-avatar">
+                                    {{ req.user.username|first|upper }}
+                                </div>
+                                <div>
+                                    <div class="user-name">{{ req.user.username }}</div>
+                                    <div class="user-email">{{ req.user.email }}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{ req.user.phone_number|default:"-" }}</td>
+                        <td class="date-text">{{ req.created_at|date:"d M Y H:i" }}</td>
+                        <td><span class="badge-pending">Pending</span></td>
+                        <td>
+                            <div class="action-btns">
+                                <form method="post" action="{% url 'users:approve_registration' req.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-approve">
+                                        <i class="fas fa-check"></i> อนุมัติ
+                                    </button>
+                                </form>
+                                <form method="post" action="{% url 'users:reject_registration' req.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-reject">
+                                        <i class="fas fa-times"></i> ปฏิเสธ
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="empty-state">
+                <i class="fas fa-inbox"></i>
+                <p>ไม่มีคำขอสมัครสมาชิกที่รอการอนุมัติ</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>

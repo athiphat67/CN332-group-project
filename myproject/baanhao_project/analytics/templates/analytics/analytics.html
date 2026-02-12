@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/analytics.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+
+    <h2 class="fw-bold mb-4">Analytics</h2>
+
+    <div class="row g-4">
+
+        <!-- LEFT SIDE -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0 rounded-4 p-4 analytics-card">
+                <div class="row align-items-center">
+
+                    <div class="col-md-6 text-center">
+                        <canvas id="taskChart" width="220" height="220"></canvas>
+                        
+                    </div>
+
+                    <div class="col-md-6">
+                        <h6 class="fw-bold mb-3">All Tasks Report</h6>
+
+                        <ul class="list-unstyled">
+                            <li class="d-flex justify-content-between mb-2">
+                                <span><span class="dot bg-success"></span> Done</span>
+                                <span>13 Tasks</span>
+                            </li>
+                            <li class="d-flex justify-content-between mb-2">
+                                <span><span class="dot bg-warning"></span> Work finished late</span>
+                                <span>15 Tasks</span>
+                            </li>
+                            <li class="d-flex justify-content-between mb-2">
+                                <span><span class="dot bg-primary"></span> Processing</span>
+                                <span>20 Tasks</span>
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                <span><span class="dot bg-danger"></span> Overdue</span>
+                                <span>16 Tasks</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0 rounded-4 p-4 analytics-card">
+                <h6 class="fw-bold mb-3">High Performance</h6>
+
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>งานประปา</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="progress rounded-pill">
+                        <div class="progress-bar bg-success" style="width:95%"></div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>งานสวน</span>
+                        <span>92%</span>
+                    </div>
+                    <div class="progress rounded-pill">
+                        <div class="progress-bar bg-success" style="width:92%"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="d-flex justify-content-between">
+                        <span>งานทำความสะอาด</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="progress rounded-pill">
+                        <div class="progress-bar bg-success" style="width:85%"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- NEED ATTENTION -->
+        <div class="col-lg-6 offset-lg-6">
+            <div class="card shadow-sm border-0 rounded-4 p-4 analytics-card">
+                <h6 class="fw-bold mb-3">Need Attention</h6>
+
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>งานไฟฟ้า</span>
+                        <span>60%</span>
+                    </div>
+                    <div class="progress rounded-pill">
+                        <div class="progress-bar bg-danger" style="width:60%"></div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>งานส่วนกลาง</span>
+                        <span>55%</span>
+                    </div>
+                    <div class="progress rounded-pill">
+                        <div class="progress-bar bg-danger" style="width:55%"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="d-flex justify-content-between">
+                        <span>การระบายน้ำ</span>
+                        <span>50%</span>
+                    </div>
+                    <div class="progress rounded-pill">
+                        <div class="progress-bar bg-danger" style="width:50%"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const centerText = {
+    id: 'centerText',
+    beforeDraw(chart) {
+        const { width } = chart;
+        const { height } = chart;
+        const ctx = chart.ctx;
+
+        ctx.restore();
+
+        const fontSize = (height / 120).toFixed(2);
+        ctx.font = fontSize + "em sans-serif";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = "#212529";
+
+        const text = "64";
+        const textX = Math.round((width - ctx.measureText(text).width) / 2);
+        const textY = height / 2 - 10;
+
+        ctx.fillText(text, textX, textY);
+
+        ctx.font = "16px sans-serif";
+        ctx.fillStyle = "#6c757d";
+        ctx.fillText("Jobs", width / 2 - 18, height / 2 + 20);
+
+        ctx.save();
+    }
+};
+
+const ctx = document.getElementById('taskChart');
+
+new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Done','Late','Processing','Overdue'],
+        datasets: [{
+            data: [13,15,20,16],
+            backgroundColor: [
+                '#28a745',
+                '#ffc107',
+                '#0d6efd',
+                '#dc3545'
+            ],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        cutout: '75%',
+        plugins: {
+            legend: { display: false }
+        }
+    },
+    plugins: [centerText]
+});
+</script>
+{% endblock %}

@@ -1,0 +1,207 @@
+/* =========================================
+   1. PAGE LAYOUT & COLORS
+   ========================================= */
+   :root {
+    --bg-light-blue: #F0F5FA;    /* สีพื้นหลังฟ้าอ่อน */
+    --color-brown-dark: #5D4037; /* สีน้ำตาลเข้ม (Theme หลัก) */
+    --color-text-main: #333333;
+    --color-text-sub: #999999;
+    --color-success: #2ECC71;    /* สีเขียว Active */
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* พื้นหลังของหน้า Staff */
+.staff-page-container {
+    background-color: var(--bg-light-blue);
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+/* หัวข้อหน้า */
+.page-header {
+    margin-bottom: 30px;
+}
+.page-subtitle {
+    color: var(--color-text-sub);
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+.page-title {
+    color: #000;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+/* =========================================
+   2. FILTER BUTTONS (ปุ่มเลือกประเภท)
+   ========================================= */
+.filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.filter-btn {
+    background-color: #fff;
+    color: #AAA;
+    border: none;
+    border-radius: 50px; /* ทรงแคปซูล */
+    padding: 10px 25px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    text-decoration: none; /* ลบขีดเส้นใต้ link */
+    display: flex;
+    align-items: center;
+}
+
+.filter-btn:hover {
+    background-color: #fff;
+    color: var(--color-brown-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* ปุ่มที่ถูกเลือก (Active) */
+.filter-btn.active {
+    background-color: var(--color-brown-dark);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(93, 64, 55, 0.3);
+}
+
+.count-badge {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 8px;
+}
+
+/* =========================================
+   3. STAFF CARD (การ์ดพนักงาน)
+   ========================================= */
+.staff-card {
+    background-color: #fff;
+    border-radius: 24px;
+    padding: 30px 20px;
+    text-align: center;
+    border: none;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.2s ease;
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+}
+
+.staff-card:hover {
+    transform: translateY(-10px); /* ลอยขึ้นเมื่อเอาเมาส์ชี้ */
+}
+
+/* ปุ่มเมนู 3 จุด มุมขวาบน */
+.card-menu-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #CCC;
+    font-size: 1.2rem;
+}
+
+/* รูปโปรไฟล์ */
+.profile-image-box {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #F8F9FA;
+    border: 1px solid #EEE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ข้อมูลพนักงาน */
+.staff-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #000;
+    margin-bottom: 5px;
+}
+
+.role-label {
+    background-color: #F0F0F0;
+    color: #888;
+    font-size: 0.75rem;
+    padding: 4px 12px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.contact-info {
+    color: #666;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* สถานะ (Active) */
+.status-pill {
+    margin-top: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-success);
+    font-weight: 600;
+    font-size: 0.9rem;
+    background-color: rgba(46, 204, 113, 0.1);
+    padding: 6px 16px;
+    border-radius: 20px;
+}
+
+/* =========================================
+   4. PAGINATION (ปุ่มเปลี่ยนหน้า)
+   ========================================= */
+.pagination-container {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.page-btn {
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.page-btn:hover {
+    background-color: #F5F5F5;
+}
+
+.page-btn.active {
+    background-color: var(--color-brown-dark);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(93, 64, 55, 0.3);
+}

@@ -78,3 +78,19 @@ class Security(models.Model):
 class Admin(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='admin_profile')
     permission_level = models.CharField(max_length=20) # Diagram: Enum
+
+# Registration Request
+class RequestStatus(models.TextChoices):
+    PENDING = 'PENDING', _('Pending')
+    APPROVED = 'APPROVED', _('Approved')
+    REJECTED = 'REJECTED', _('Rejected')
+
+class RegistrationRequest(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='registration_request')
+    status = models.CharField(max_length=20, choices=RequestStatus.choices, default=RequestStatus.PENDING)
+    created_at = models.DateTimeField(auto_now_add=True)
+    reviewed_at = models.DateTimeField(null=True, blank=True)
+    reviewed_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='reviewed_requests')
+
+    def __str__(self):
+        return f"Registration: {self.user.username} ({self.get_status_display()})"

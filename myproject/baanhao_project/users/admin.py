@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, Resident, Technician, JuristicOfficer, Security, Admin as AdminModel
+from .models import User, Resident, Technician, JuristicOfficer, Security, Admin as AdminModel, RegistrationRequest
 
 # 1. ปรับแต่ง User Admin ให้รองรับ Custom Fields ของเรา
 class CustomUserAdmin(UserAdmin):
@@ -48,3 +48,9 @@ class SecurityAdmin(admin.ModelAdmin):
 @admin.register(AdminModel)
 class AdminRoleAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'permission_level']
+
+@admin.register(RegistrationRequest)
+class RegistrationRequestAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user', 'status', 'created_at', 'reviewed_at', 'reviewed_by']
+    list_filter = ['status']
+    search_fields = ['user__username', 'user__email']

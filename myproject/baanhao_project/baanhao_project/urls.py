@@ -16,13 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 
 urlpatterns = [
+
+    # Root: redirect to login page
+    path('', RedirectView.as_view(url='/users/login/', permanent=False)),
 
     # Django administration
     path('admin/', admin.site.urls),
     
-    # Home : dashboard
+    # Allauth
+    path('accounts/', include('allauth.urls')),
+
+    # Dashboard
     path('', include('dashboard.urls')),
     
     # Issue

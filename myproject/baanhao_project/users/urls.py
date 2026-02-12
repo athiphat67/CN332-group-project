@@ -12,6 +12,14 @@ urlpatterns = [
     # Authentication
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
+    path('register/', views.register_view, name='register'),
+    path('social-extra-info/', views.social_extra_info_view, name='social_extra_info'),
+    path('social-login/<str:provider>/', views.social_login_check_view, name='social_login_check'),
+    
+    # Admin: Registration Approval
+    path('pending-registrations/', views.pending_registrations_view, name='pending_registrations'),
+    path('approve-registration/<int:request_id>/', views.approve_registration_view, name='approve_registration'),
+    path('reject-registration/<int:request_id>/', views.reject_registration_view, name='reject_registration'),
     
     # Password Reset
     path('password_reset/', auth_views.PasswordResetView.as_view(

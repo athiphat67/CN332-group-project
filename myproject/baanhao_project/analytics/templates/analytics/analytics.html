@@ -171,76 +171,75 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-const totalTasks = 13 + 15 + 20 + 16; // รวมทั้งหมด = 64
+    const totalTasks = 13 + 15 + 20 + 16;
 
-// ===== Plugin เขียนเลขกลางวง =====
-const centerTextPlugin = {
-    id: 'centerText',
-    beforeDraw(chart) {
-        const { width, height, ctx } = chart;
-        ctx.restore();
+    const centerTextPlugin = {
+        id: 'centerText',
+        beforeDraw(chart) {
+            const { width, height, ctx } = chart;
+            ctx.restore();
 
-        const fontSize = (height / 110).toFixed(2);
-        ctx.font = fontSize + "em sans-serif";
-        ctx.textBaseline = "middle";
-        ctx.fillStyle = "#212529";
+            const fontSize = (height / 110).toFixed(2);
+            ctx.font = fontSize + "em sans-serif";
+            ctx.textBaseline = "middle";
+            ctx.fillStyle = "#212529";
 
-        const text = totalTasks.toString();
-        const textX = Math.round((width - ctx.measureText(text).width) / 2);
-        const textY = height / 2 - 10;
+            const text = totalTasks.toString();
+            const textX = Math.round((width - ctx.measureText(text).width) / 2);
+            const textY = height / 2 - 10;
 
-        ctx.fillText(text, textX, textY);
+            ctx.fillText(text, textX, textY);
 
-        ctx.font = "16px sans-serif";
-        ctx.fillStyle = "#6c757d";
-        ctx.fillText("Total Tasks", width / 2 - 40, height / 2 + 20);
+            ctx.font = "16px sans-serif";
+            ctx.fillStyle = "#6c757d";
+            ctx.fillText("Total Tasks", width / 2 - 40, height / 2 + 20);
 
-        ctx.save();
-    }
-};
-
-// ===== Doughnut Chart =====
-const ctx1 = document.getElementById('taskChart');
-
-new Chart(ctx1, {
-    type: 'doughnut',
-    data: {
-        labels: ['Done','Late','Processing','Overdue'],
-        datasets: [{
-            data: [13,15,20,16],
-            backgroundColor: [
-                '#28a745',
-                '#ffc107',
-                '#0d6efd',
-                '#dc3545'
-            ],
-            borderWidth: 0
-        }]
-    },
-    options: {
-        cutout: '75%',
-        plugins: {
-            legend: { position: 'bottom' }
+            ctx.save();
         }
-    },
-    plugins: [centerTextPlugin]
-});
+    };
 
-const ctx2 = document.getElementById('trendChart');
-new Chart(ctx2, {
-    type: 'line',
-    data: {
-        labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
-        datasets: [{
-            label: 'Tasks',
-            data: [5,8,6,10,12,7,9],
-            tension: 0.4,
-            fill: true
-        }]
-    },
-    options: {
-        responsive: true
-    }
-});
+    // ===== Doughnut Chart =====
+    const ctx1 = document.getElementById('taskChart');
+
+    new Chart(ctx1, {
+        type: 'doughnut',
+        data: {
+            labels: ['Done', 'Late', 'Processing', 'Overdue'],
+            datasets: [{
+                data: [13, 15, 20, 16],
+                backgroundColor: [
+                    '#28a745',
+                    '#ffc107',
+                    '#0d6efd',
+                    '#dc3545'
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            cutout: '75%',
+            plugins: {
+                legend: { position: 'bottom' }
+            }
+        },
+        plugins: [centerTextPlugin]
+    });
+
+    const ctx2 = document.getElementById('trendChart');
+    new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Tasks',
+                data: [5, 8, 6, 10, 12, 7, 9],
+                tension: 0.4,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
 </script>
 {% endblock %}

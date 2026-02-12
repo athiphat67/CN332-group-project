@@ -8,50 +8,89 @@
 {% block content %}
 <div class="container-fluid py-4">
 
-    <h2 class="fw-bold mb-4">Analytics</h2>
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-1">Analytics Dashboard</h2>
+            <small class="text-muted">ภาพรวมประสิทธิภาพการทำงาน</small>
+        </div>
 
-    <div class="row g-4">
+        <div class="d-flex gap-2">
+            <select class="form-select">
+                <option>Today</option>
+                <option>Last 7 Days</option>
+                <option selected>Last 30 Days</option>
+                <option>Custom Range</option>
+            </select>
 
-        <!-- LEFT SIDE -->
-        <div class="col-lg-6">
-            <div class="card shadow-sm border-0 rounded-4 p-4 analytics-card">
-                <div class="row align-items-center">
+            <button class="btn btn-primary">
+                <i class="bi bi-download me-1"></i> Export
+            </button>
+        </div>
+    </div>
 
-                    <div class="col-md-6 text-center">
-                        <canvas id="taskChart" width="220" height="220"></canvas>
-                        
-                    </div>
+    <!-- SUMMARY CARDS -->
+    <div class="row g-4 mb-4">
 
-                    <div class="col-md-6">
-                        <h6 class="fw-bold mb-3">All Tasks Report</h6>
-
-                        <ul class="list-unstyled">
-                            <li class="d-flex justify-content-between mb-2">
-                                <span><span class="dot bg-success"></span> Done</span>
-                                <span>13 Tasks</span>
-                            </li>
-                            <li class="d-flex justify-content-between mb-2">
-                                <span><span class="dot bg-warning"></span> Work finished late</span>
-                                <span>15 Tasks</span>
-                            </li>
-                            <li class="d-flex justify-content-between mb-2">
-                                <span><span class="dot bg-primary"></span> Processing</span>
-                                <span>20 Tasks</span>
-                            </li>
-                            <li class="d-flex justify-content-between">
-                                <span><span class="dot bg-danger"></span> Overdue</span>
-                                <span>16 Tasks</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
+        <div class="col-md-3">
+            <div class="stat-card shadow-sm">
+                <h6>Total Tasks</h6>
+                <h3 class="fw-bold">64</h3>
             </div>
         </div>
 
-        <!-- RIGHT SIDE -->
+        <div class="col-md-3">
+            <div class="stat-card shadow-sm">
+                <h6>Completed</h6>
+                <h3 class="text-success fw-bold">13</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card shadow-sm">
+                <h6>Processing</h6>
+                <h3 class="text-primary fw-bold">20</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card shadow-sm">
+                <h6>Overdue</h6>
+                <h3 class="text-danger fw-bold">16</h3>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CHART SECTION -->
+    <div class="row g-4">
+
+        <!-- LEFT: DOUGHNUT -->
         <div class="col-lg-6">
-            <div class="card shadow-sm border-0 rounded-4 p-4 analytics-card">
+            <div class="card shadow-sm rounded-4 p-4 analytics-card">
+                <div class="d-flex justify-content-between mb-3">
+                    <h6 class="fw-bold">Task Distribution</h6>
+                </div>
+
+                <canvas id="taskChart" height="250"></canvas>
+            </div>
+        </div>
+
+        <!-- RIGHT: TREND -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm rounded-4 p-4 analytics-card">
+                <h6 class="fw-bold mb-3">Daily Trend</h6>
+                <canvas id="trendChart" height="250"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- PERFORMANCE SECTION -->
+    <div class="row g-4 mt-1">
+
+        <div class="col-lg-6">
+            <div class="card shadow-sm rounded-4 p-4 analytics-card">
                 <h6 class="fw-bold mb-3">High Performance</h6>
 
                 <div class="mb-3">
@@ -83,13 +122,11 @@
                         <div class="progress-bar bg-success" style="width:85%"></div>
                     </div>
                 </div>
-
             </div>
         </div>
 
-        <!-- NEED ATTENTION -->
-        <div class="col-lg-6 offset-lg-6">
-            <div class="card shadow-sm border-0 rounded-4 p-4 analytics-card">
+        <div class="col-lg-6">
+            <div class="card shadow-sm rounded-4 p-4 analytics-card">
                 <h6 class="fw-bold mb-3">Need Attention</h6>
 
                 <div class="mb-3">
@@ -126,27 +163,29 @@
         </div>
 
     </div>
+
 </div>
 {% endblock %}
 
 {% block extra_js %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
-const centerText = {
+const totalTasks = 13 + 15 + 20 + 16; // รวมทั้งหมด = 64
+
+// ===== Plugin เขียนเลขกลางวง =====
+const centerTextPlugin = {
     id: 'centerText',
     beforeDraw(chart) {
-        const { width } = chart;
-        const { height } = chart;
-        const ctx = chart.ctx;
-
+        const { width, height, ctx } = chart;
         ctx.restore();
 
-        const fontSize = (height / 120).toFixed(2);
+        const fontSize = (height / 110).toFixed(2);
         ctx.font = fontSize + "em sans-serif";
         ctx.textBaseline = "middle";
         ctx.fillStyle = "#212529";
 
-        const text = "64";
+        const text = totalTasks.toString();
         const textX = Math.round((width - ctx.measureText(text).width) / 2);
         const textY = height / 2 - 10;
 
@@ -154,15 +193,16 @@ const centerText = {
 
         ctx.font = "16px sans-serif";
         ctx.fillStyle = "#6c757d";
-        ctx.fillText("Jobs", width / 2 - 18, height / 2 + 20);
+        ctx.fillText("Total Tasks", width / 2 - 40, height / 2 + 20);
 
         ctx.save();
     }
 };
 
-const ctx = document.getElementById('taskChart');
+// ===== Doughnut Chart =====
+const ctx1 = document.getElementById('taskChart');
 
-new Chart(ctx, {
+new Chart(ctx1, {
     type: 'doughnut',
     data: {
         labels: ['Done','Late','Processing','Overdue'],
@@ -180,10 +220,27 @@ new Chart(ctx, {
     options: {
         cutout: '75%',
         plugins: {
-            legend: { display: false }
+            legend: { position: 'bottom' }
         }
     },
-    plugins: [centerText]
+    plugins: [centerTextPlugin]
+});
+
+const ctx2 = document.getElementById('trendChart');
+new Chart(ctx2, {
+    type: 'line',
+    data: {
+        labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+        datasets: [{
+            label: 'Tasks',
+            data: [5,8,6,10,12,7,9],
+            tension: 0.4,
+            fill: true
+        }]
+    },
+    options: {
+        responsive: true
+    }
 });
 </script>
 {% endblock %}

@@ -47,12 +47,15 @@ INSTALLED_APPS = [
     'dashboard',
     'analytics',
     'notifications',
+<<<<<<< HEAD
     'django.contrib.sites',  # Required for allauth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.line',
+=======
+>>>>>>> main
 ]
 
 MIDDLEWARE = [

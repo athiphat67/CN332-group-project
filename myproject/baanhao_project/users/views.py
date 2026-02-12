@@ -48,8 +48,12 @@ def login_view(request):
 
 def logout_view(request):
     """Handle user logout"""
+    storage = messages.get_messages(request)
+    for _ in storage:
+        pass
+    
     logout(request)
-    messages.success(request, 'ออกจากระบบเรียบร้อยแล้ว')
+    messages.success(request, 'You have been logged out')
     return redirect('users:login')
 
 

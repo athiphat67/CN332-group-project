@@ -1,0 +1,82 @@
+.broadcast-container {
+    display: flex;
+    gap: 40px;
+}
+
+.broadcast-left,
+.broadcast-right {
+    background: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    flex: 1;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.calendar-box {
+    margin-top: 20px;
+}
+
+.time-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.time-btn {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background: #f8f8f8;
+    cursor: pointer;
+}
+
+.time-btn.active {
+    background: #6b4a3f;
+    color: white;
+}
+
+.confirm-btn {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+.send-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #2DA44E, #24913F);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 6px 18px rgba(45, 164, 78, 0.25);
+}
+
+.send-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(45, 164, 78, 0.35);
+}
+
+.send-btn:active {
+    transform: scale(0.98);
+}

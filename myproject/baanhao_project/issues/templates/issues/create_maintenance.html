@@ -1,99 +1,87 @@
-<div class="container-fluid py-4" style="background-color: #F8FAFC;">
-    
-    <div class="mb-4">
-        <a href="{% url 'maintenance_tasks' %}" class="text-decoration-none text-muted mb-2 d-inline-block">
-            <i class="bi bi-arrow-left me-1"></i> Back to List
-        </a>
-        <h2 class="fw-bold">Create New Task</h2>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/create_maintenance.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="page-bg">
+    <a href="{% url 'maintenance_tasks' %}" class="text-decoration-none text-muted mb-2 d-inline-block fw-bold small">
+        <i class="bi bi-arrow-left me-1"></i> Back to List
+    </a>
+    <h2 class="fw-bold mb-4" style="color: #111827;">Create New Task</h2>
+
+    <div class="toggle-container">
+        <a href="#" class="btn-toggle active-purple">Maintenance (แจ้งซ่อม)</a>
         
-        <div class="mt-3">
-            <a href="#" class="btn text-white fw-bold rounded-pill px-4 me-2 shadow-sm" 
-               style="background-color: #8B5CF6; border: none;"> Maintenance (แจ้งซ่อม)
-            </a>
-            <a href="{% url 'create_complaint' %}" class="btn btn-light text-muted fw-bold rounded-pill px-4">
-                Complaint (แจ้งเหตุ)
-            </a>
-        </div>
+        <a href="{% url 'create_complaint' %}" class="btn-toggle">Complaint (แจ้งเหตุ)</a>
     </div>
 
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" id="taskForm">
         {% csrf_token %}
-        
-        <div class="row">
-            <div class="col-lg-8 mb-4">
-                <div class="card border-0 shadow-sm rounded-4 h-100">
-                    <div class="card-body p-4">
-                        <div class="d-flex justify-content-between mb-4">
-                            <h5 class="fw-bold">Common Details (ข้อมูลทั่วไป)</h5>
-                            <span class="text-muted small">create on : {% now "d/M/Y" %}</span>
-                        </div>
+        <div class="row g-4">
+            
+            <div class="col-lg-8">
+                <div class="white-card theme-maintenance">
+                    <div class="d-flex justify-content-between align-items-center mb-4 pb-2">
+                        <h5 class="fw-bold mb-0">Common Details <span class="fw-normal fs-6">(ข้อมูลทั่วไป)</span></h5>
+                        <span class="text-muted small fw-medium">create on : {% now "d/M/Y" %}</span>
+                    </div>
 
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">Title / Subject</label>
-                            {{ form.title }}
+                    <div class="mb-4">
+                        <label class="custom-label">Title / Subject</label>
+                        {{ form.title }}
+                    </div>
+                    <div class="mb-4">
+                        <label class="custom-label">Description</label>
+                        {{ form.description }}
+                    </div>
+                    <div class="mb-4">
+                        <label class="custom-label">Location</label>
+                        {{ form.location }}
+                    </div>
+                    <div class="mb-2">
+                        <label class="custom-label">Work Image (รูปปัญหาหน้างาน)</label>
+                        
+                        <div class="upload-box" onclick="document.getElementById('hiddenFileInput').click();">
+                            <i class="bi bi-camera-fill"></i>
+                            <p>Upload photos</p>
+                            <small id="fileNameDisplay" class="text-primary mt-1 fw-bold"></small>
                         </div>
-
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">Description</label>
-                            {{ form.description }}
+                        
+                        <div style="display: none;">
+                            {{ form.before_image }}
                         </div>
-
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">Location</label>
-                            {{ form.location }}
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">Work Image (รูปปัญหาหน้างาน)</label>
-                            
-                            <div class="text-center p-5 rounded-4" 
-                                 style="border: 2px dashed #CBD5E1; background-color: #F8FAFC; cursor: pointer;"
-                                 onclick="document.getElementById('fileInput').click();">
-                                <i class="bi bi-camera-fill fs-3 text-muted mb-2"></i>
-                                <p class="text-muted mb-0">Upload photos</p>
-                                <small id="fileNameDisplay" class="text-primary"></small>
-                            </div>
-                            {{ form.before_image }} 
-                        </div>
-
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-4 mb-4">
-                <div class="card border-0 shadow-sm rounded-4 h-100">
-                    <div class="card-body p-4">
-                        <h5 class="fw-bold mb-4">Specific Info</h5>
-
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">Reported By (Resident)</label>
-                            {{ form.reporter }}
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">Priority</label>
-                            {{ form.priority }}
-                        </div>
-                        
-                        <hr class="my-4 text-muted opacity-25">
-
-                        <h5 class="fw-bold mb-3">Assign & Appointment</h5>
-
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold" style="color: #8B5CF6;">Assign Technician</label>
-                            {{ form.technician }}
-                        </div>
-
-                        <div class="mb-4">
-                            <label class="form-label text-muted small fw-bold" style="color: #8B5CF6;">Appointment Date</label>
-                            {{ form.appointment_date }}
-                        </div>
-
-                        <button type="submit" class="btn w-100 py-2 rounded-3 text-white fw-bold" 
-                                style="background-color: #5D4037;"> 
-                                Create Maintenance Task
-                        </button>
+            <div class="col-lg-4">
+                <div class="white-card theme-maintenance">
+                    <h5 class="fw-bold mb-4 pb-2">Specific Info</h5>
+                    <div class="mb-4">
+                        <label class="custom-label">Reported By (Resident)</label>
+                        {{ form.reporter }}
                     </div>
+                    <div class="mb-4">
+                        <label class="custom-label">Priority</label>
+                        {{ form.priority }}
+                    </div>
+
+                    <hr style="border-color: #E5E7EB; margin: 25px 0;">
+
+                    <h5 class="fw-bold mb-4 pb-1">Assign & Appointment</h5>
+                    <div class="mb-4">
+                        <label class="custom-label purple-label">Assign Technician</label>
+                        {{ form.technician }}
+                    </div>
+                    <div class="mb-5">
+                        <label class="custom-label purple-label">Appointment Date</label>
+                        {{ form.appointment_date }}
+                    </div>
+
+                    <button type="submit" class="btn-submit-brown">Create Maintenance Task</button>
                 </div>
             </div>
         </div>
@@ -101,10 +89,34 @@
 </div>
 
 <script>
-    // Script สำหรับแสดงชื่อไฟล์ที่เลือก
-    document.getElementById('fileInput').addEventListener('change', function(e) {
-        if (e.target.files[0]) {
-            document.getElementById('fileNameDisplay').innerText = 'Selected: ' + e.target.files[0].name;
-        }
+    document.addEventListener("DOMContentLoaded", function() {
+        // 1. แอดคลาสให้ Input ของ Django สวยงาม
+        const inputs = document.querySelectorAll('.white-card input:not([type="file"]):not([type="hidden"]), .white-card textarea');
+        const selects = document.querySelectorAll('.white-card select');
+        
+        inputs.forEach(i => i.classList.add('form-control'));
+        selects.forEach(s => s.classList.add('form-select'));
+
+        // 2. เติมลายน้ำ (Placeholder) เข้าไปในช่องกรอกข้อมูล
+        const titleInput = document.querySelector('input[name="title"]');
+        if(titleInput) titleInput.placeholder = "e.g. ท่อน้ำรั่ว";
+
+        const descInput = document.querySelector('textarea[name="description"]');
+        if(descInput) descInput.placeholder = "รายละเอียดของปัญหา...";
+
+        const locInput = document.querySelector('input[name="location"]');
+        if(locInput) locInput.placeholder = "e.g. ลูกบ้านเลขที่ 42";
+
+        // 3. จัดการอัปโหลดไฟล์ให้โชว์ชื่อ
+        const fileInputs = document.querySelectorAll('input[type="file"]');
+        fileInputs.forEach(input => {
+            input.id = 'hiddenFileInput';
+            input.addEventListener('change', function(e) {
+                if (e.target.files[0]) {
+                    document.getElementById('fileNameDisplay').innerText = e.target.files[0].name;
+                }
+            });
+        });
     });
 </script>
+{% endblock %}

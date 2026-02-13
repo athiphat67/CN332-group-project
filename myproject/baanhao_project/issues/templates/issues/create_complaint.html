@@ -1,90 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
 
-<div class="container-fluid py-4" style="background-color: #F8FAFC;"> <div class="mb-4">
-        <a href="{% url 'complaint_tasks' %}" class="text-decoration-none text-muted mb-2 d-inline-block">
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/create_complaint.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="page-bg">
+    
+    <div class="mb-2">
+        <a href="{% url 'complaint_tasks' %}" class="text-decoration-none text-muted mb-2 d-inline-block fw-bold small">
             <i class="bi bi-arrow-left me-1"></i> Back to List
         </a>
-        <h2 class="fw-bold">Create New Task</h2>
+        <h2 class="fw-bold mb-3" style="color: #111827;">Create New Task</h2>
         
-        <div class="mt-3">
-            <a href="{% url 'create_maintenance' %}" class="btn btn-light text-muted fw-bold rounded-pill px-4 me-2">
-                Maintenance (แจ้งซ่อม)
-            </a>
-            <a href="#" class="btn btn-warning text-white fw-bold rounded-pill px-4 shadow-sm" style="background-color: #F59E0B; border: none;">
-                Complaint (แจ้งเหตุ)
-            </a>
+        <div class="toggle-container">
+            <a href="{% url 'create_maintenance' %}" class="btn-toggle">Maintenance (แจ้งซ่อม)</a>
+            <a href="#" class="btn-toggle active-orange">Complaint (แจ้งเหตุ)</a>
         </div>
     </div>
 
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" id="complaintForm">
         {% csrf_token %}
         
-        <div class="row">
-            <div class="col-lg-8 mb-4">
-                <div class="card border-0 shadow-sm rounded-4 h-100">
-                    <div class="card-body p-4">
-                        <div class="d-flex justify-content-between mb-4">
-                            <h5 class="fw-bold">Common Details (ข้อมูลทั่วไป)</h5>
-                            <span class="text-muted small">create on : {% now "d/M/Y" %}</span>
-                        </div>
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="white-card theme-complaint">
+                    <div class="d-flex justify-content-between align-items-center mb-4 pb-2">
+                        <h5 class="fw-bold mb-0">Common Details <span class="fw-normal fs-6">(ข้อมูลทั่วไป)</span></h5>
+                        <span class="text-muted small fw-medium">create on : {% now "d/M/Y" %}</span>
+                    </div>
 
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">Title / Subject</label>
-                            {{ form.title }}
-                        </div>
+                    <div class="mb-4">
+                        <label class="custom-label">Title / Subject</label>
+                        {{ form.title }}
+                    </div>
 
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">Description</label>
-                            {{ form.description }}
-                        </div>
+                    <div class="mb-4">
+                        <label class="custom-label">Description</label>
+                        {{ form.description }}
+                    </div>
 
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">Location</label>
-                            {{ form.location }}
-                        </div>
+                    <div class="mb-4">
+                        <label class="custom-label">Location</label>
+                        {{ form.location }}
+                    </div>
 
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">Evidence Image (รูปหลักฐาน)</label>
-                            
-                            <div class="text-center p-5 rounded-4" 
-                                 style="border: 2px dashed #CBD5E1; background-color: #F8FAFC; cursor: pointer;"
-                                 onclick="document.getElementById('fileInput').click();">
-                                <i class="bi bi-camera-fill fs-3 text-muted mb-2"></i>
-                                <p class="text-muted mb-0">Upload photos</p>
-                                <small id="fileNameDisplay" class="text-primary"></small>
-                            </div>
+                    <div class="mb-2">
+                        <label class="custom-label">Evidence Image (รูปหลักฐาน)</label>
+                        
+                        <div class="upload-box" onclick="document.querySelector('.hidden-file-input').click();">
+                            <i class="bi bi-camera-fill"></i>
+                            <p>Upload photos</p>
+                            <small id="fileNameDisplay" class="text-primary mt-1 fw-bold"></small>
+                        </div>
+                        
+                        <div style="display: none;">
                             {{ form.evidence_image }} 
                         </div>
-
                     </div>
+
                 </div>
             </div>
 
-            <div class="col-lg-4 mb-4">
-                <div class="card border-0 shadow-sm rounded-4 h-100">
-                    <div class="card-body p-4">
-                        <h5 class="fw-bold mb-4">Specific Info</h5>
+            <div class="col-lg-4">
+                <div class="white-card theme-complaint">
+                    <h5 class="fw-bold mb-4 pb-2">Specific Info</h5>
 
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">Reported By (Resident)</label>
-                            {{ form.reporter }}
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">Priority</label>
-                            {{ form.priority }}
-                        </div>
-                        
-                        <hr class="my-4 text-muted opacity-25">
-
-                        <div class="mb-4">
-                            <label class="form-label text-muted small fw-bold" style="color: #F59E0B;">Category</label>
-                            {{ form.category }}
-                        </div>
-
-                        <button type="submit" class="btn w-100 py-2 rounded-3 text-white fw-bold" 
-                                style="background-color: #5D4037;"> Submit Complaint
-                        </button>
+                    <div class="mb-4">
+                        <label class="custom-label">Reported By (Resident)</label>
+                        {{ form.reporter }}
                     </div>
+
+                    <div class="mb-4">
+                        <label class="custom-label">Priority</label>
+                        {{ form.priority }}
+                    </div>
+                    
+                    <hr class="custom-hr">
+
+                    <div class="mb-5 mt-4">
+                        <label class="custom-label orange-label">Category</label>
+                        {{ form.category }}
+                    </div>
+
+                    <button type="submit" class="btn-submit-brown"> 
+                        Submit Complaint
+                    </button>
                 </div>
             </div>
         </div>
@@ -92,9 +94,36 @@
 </div>
 
 <script>
-    document.getElementById('fileInput').addEventListener('change', function(e) {
-        if (e.target.files[0]) {
-            document.getElementById('fileNameDisplay').innerText = 'Selected: ' + e.target.files[0].name;
-        }
+    document.addEventListener("DOMContentLoaded", function() {
+        // ให้ Class ของ Bootstrap กับ Form อัตโนมัติ เพื่อให้ CSS ที่เขียนไว้ทำงาน
+        const formInputs = document.querySelectorAll('#complaintForm input:not([type="file"]):not([type="hidden"]), #complaintForm textarea');
+        const formSelects = document.querySelectorAll('#complaintForm select');
+
+        formInputs.forEach(input => { input.classList.add('form-control'); });
+        formSelects.forEach(select => { select.classList.add('form-select'); });
+
+        // เติม Placeholder ลายน้ำจางๆ
+        const titleInput = document.querySelector('input[name="title"]');
+        if(titleInput) titleInput.placeholder = "e.g. ไฟถนนหลอดขาด";
+
+        const descInput = document.querySelector('textarea[name="description"]');
+        if(descInput) descInput.placeholder = "รายละเอียดของปัญหา...";
+
+        const locInput = document.querySelector('input[name="location"]');
+        if(locInput) locInput.placeholder = "e.g. Zone A, 100/12, Gym";
+
+        // โชว์ชื่อไฟล์เวลาอัปโหลดเสร็จ
+        const fileInputs = document.querySelectorAll('input[type="file"]');
+        fileInputs.forEach(input => {
+            input.classList.add('hidden-file-input');
+            input.addEventListener('change', function(e) {
+                if (e.target.files && e.target.files[0]) {
+                    document.getElementById('fileNameDisplay').innerText = e.target.files[0].name;
+                } else {
+                    document.getElementById('fileNameDisplay').innerText = '';
+                }
+            });
+        });
     });
 </script>
+{% endblock %}

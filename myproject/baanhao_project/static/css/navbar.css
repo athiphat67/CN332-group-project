@@ -33,6 +33,8 @@ body {
     display: flex;
     flex-direction: column;
     border-right: 1px solid rgba(0,0,0,0.02);
+
+    overflow-y: auto;
 }
 
 .app-main {
@@ -237,4 +239,50 @@ body {
         margin-left: 0;
         padding: 20px;
     }
+}
+/* Notification Dropdown */
+.submenu {
+    display: none;
+    flex-direction: column;
+    margin-left: 30px;
+    margin-top: 6px;
+    gap: 4px;
+}
+
+.submenu.show {
+    display: flex;
+}
+
+.sidebar-sublink {
+    text-decoration: none;
+    color: #666;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.sidebar-sublink:hover {
+    background-color: #ece6dc;
+    color: #000;
+}
+
+/* Active page highlight */
+.sidebar-sublink.active {
+    background-color: #e2dbcf;
+    color: #000;
+    font-weight: 600;
+}
+
+/* Arrow animation */
+#notiArrow {
+    transition: 0.3s ease;
+}
+
+#notiArrow.rotate {
+    transform: rotate(180deg);
 }

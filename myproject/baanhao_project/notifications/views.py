@@ -21,3 +21,13 @@ def notification_view(request):
     return render(request, "notifications/notifications.html", {
         "page_obj": page_obj
     })
+
+def broadcast_system(request):
+    time_slots = []
+    for h in range(7, 21):
+        time_slots.append(f"{h:02d}:00")
+        time_slots.append(f"{h:02d}:30")
+
+    return render(request, "notifications/broadcast_system.html", {
+        "time_slots": time_slots
+    })

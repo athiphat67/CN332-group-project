@@ -137,14 +137,35 @@
             <p class="text-muted">Admin Dashboard</p>
         </div>
 
-        <a href="{% url 'all_tasks' %}" class="text-decoration-none text-muted mb-2 d-inline-block">
+        <a href="{% url 'issues:all_tasks' %}" class="text-decoration-none text-muted mb-2 d-inline-block">
             <i class="bi bi-arrow-left me-1"></i> Back to All Tasks
         </a>
 
         <div class="d-flex gap-3">
-            <div class="btn-group bg-white p-1 rounded-pill border">
-                <button class="btn btn-sm btn-dark rounded-pill px-3">List</button>
-                <button class="btn btn-sm btn-light rounded-pill px-3 text-muted">Calendar</button>
+            <div class="btn-group bg-white p-1 rounded-pill border shadow-sm">
+
+                <!-- LIST -->
+                <a href="{% url 'issues:maintenance_tasks' %}"
+                class="btn btn-sm rounded-pill px-3
+                {% if request.resolver_match.url_name == 'maintenance_tasks' %}
+                        btn-dark
+                {% else %}
+                        btn-light text-muted
+                {% endif %}">
+                    List
+                </a>
+
+                <!-- CALENDAR -->
+                <a href="{% url 'issues:maintenance_calendar' %}"
+                class="btn btn-sm rounded-pill px-3
+                {% if request.resolver_match.url_name == 'maintenance_calendar' %}
+                        btn-dark
+                {% else %}
+                        btn-light text-muted
+                {% endif %}">
+                    Calendar
+                </a>
+
             </div>
 
             <form method="GET" class="position-relative">
@@ -153,7 +174,7 @@
                 <input type="hidden" name="status" value="{{ current_status }}">
             </form>
 
-            <a href="{% url 'create_complaint' %}" class="btn btn-dark rounded-pill px-4 d-flex align-items-center">
+            <a href="{% url 'issues:create_complaint' %}" class="btn btn-dark rounded-pill px-4 d-flex align-items-center">
                 <i class="bi bi-plus-lg me-2"></i> Create Complaint
             </a>
         </div>
@@ -197,7 +218,7 @@
                                 <div class="icon-circle">
                                     <i class="bi bi-file-text"></i>
                                 </div>
-                                <a href="{% url 'complaint_detail' task.id %}" class="text-decoration-none text-dark fw-bold">
+                                <a href="{% url 'issues:complaint_detail' task.id %}" class="text-decoration-none text-dark fw-bold">
                                     {{ task.title }}
                                 </a>
                             </div>

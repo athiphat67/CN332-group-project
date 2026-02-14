@@ -15,18 +15,40 @@
             <i class="bi bi-arrow-left me-1"></i> Back to Dashboard
         </a>
 
-        <a href="{% url 'maintenance_tasks' %}" class="text-decoration-none text-muted mb-2 d-inline-block">
+        <a href="{% url 'issues:maintenance_tasks' %}" class="text-decoration-none text-muted mb-2 d-inline-block">
             <i class="bi bi-arrow-left me-1"></i> All Maintenance Tasks
 
-            <a href="{% url 'complaint_tasks' %}" class="text-decoration-none text-muted mb-2 d-inline-block">
+            <a href="{% url 'issues:complaint_tasks' %}" class="text-decoration-none text-muted mb-2 d-inline-block">
                 <i class="bi bi-arrow-left me-1"></i> All Complaints Tasks
             </a>
 
             <div class="d-flex gap-3">
-                <div class="btn-group bg-white p-1 rounded-pill border">
-                    <button class="btn btn-sm btn-dark rounded-pill px-3">List</button>
-                    <button class="btn btn-sm btn-light rounded-pill px-3 text-muted">Calendar</button>
-                </div>
+        <div class="btn-group bg-white p-1 rounded-pill border">
+
+            <!-- LIST -->
+            <a href="{% url 'issues:maintenance_tasks' %}"
+            class="btn btn-sm rounded-pill px-3
+            {% if request.resolver_match.url_name == 'maintenance_tasks' %}
+                    btn-dark
+            {% else %}
+                    btn-light text-muted
+            {% endif %}">
+                List
+            </a>
+
+            <!-- CALENDAR -->
+            <a href="{% url 'issues:maintenance_calendar' %}"
+            class="btn btn-sm rounded-pill px-3
+            {% if request.resolver_match.url_name == 'maintenance_calendar' %}
+                    btn-dark
+            {% else %}
+                    btn-light text-muted
+            {% endif %}">
+                Calendar
+            </a>
+
+            </div>
+        </div>
 
                 <form method="GET" class="position-relative">
                     <input type="text" name="q" class="form-control rounded-pill ps-4" placeholder="Search task..."
@@ -34,7 +56,7 @@
                     <input type="hidden" name="status" value="{{ current_status }}">
                 </form>
 
-                <a href="{% url 'create_maintenance' %}"
+                <a href="{% url 'issues:create_maintenance' %}"
                     class="btn btn-dark rounded-pill px-4 d-flex align-items-center">
                     <i class="bi bi-plus-lg me-2"></i> Create Task
                 </a>
@@ -141,7 +163,7 @@
             </table>
         </div>
     </div>
-    <!-- Pagination (บังคับหน้า) -->>
+    <!-- Pagination (บังคับหน้า) -->
     <div class="d-flex flex-column align-items-center justify-content-center mt-5 mb-5">
         
         <span class="text-muted small mb-3">

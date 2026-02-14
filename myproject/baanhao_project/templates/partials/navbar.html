@@ -39,7 +39,7 @@
 
         <!-- All Tasks -->
         <a class="sidebar-link {% if request.resolver_match.url_name == 'all_tasks' %}active{% endif %}"
-           href="{% url 'all_tasks' %}">
+           href="{% url 'issues:all_tasks' %}">
             <i class="bi bi-list-task"></i>
             <span>All Tasks</span>
         </a>

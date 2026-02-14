@@ -7,6 +7,10 @@ from django.db.models import Q
 from .models import Issue, IssueStatus, Complaint, Maintenance
 from .forms import ComplaintForm, MaintenanceForm
 
+import calendar
+from datetime import date,datetime, timedelta
+from .models import Maintenance
+
 def all_tasks(request):
     # --- 1. Base Query ---
     # เรียกจากตารางแม่ (Issue)
@@ -278,3 +282,115 @@ def complaint_detail(request, pk):
         return redirect('complaint_detail', pk=pk)
 
     return render(request, 'issues/complaint_detail.html', {'task': task})
+
+def maintenance_calendar(request):
+
+    today = date.today()
+
+    # ==========================
+    # 1. รับ view ก่อนเลย (กัน error)
+    # ==========================
+    view_mode = request.GET.get("view", "month")
+
+    # ==========================
+    # 2. รับ date อย่างปลอดภัย
+    # ==========================
+    date_param = request.GET.get("date")
+
+    if date_param:
+        try:
+            selected_date = datetime.strptime(date_param, "%Y-%m-%d").date()
+        except ValueError:
+            selected_date = today
+    else:
+        selected_date = today
+
+    year = selected_date.year
+    month = selected_date.month
+    day = selected_date.day
+
+    # ==========================
+    # 3. prev / next (ใช้ selected_date)
+    # ==========================
+    if view_mode == "month":
+        prev_date = selected_date.replace(day=1) - timedelta(days=1)
+        next_date = (selected_date.replace(day=28) + timedelta(days=4)).replace(day=1)
+
+    elif view_mode == "week":
+        prev_date = selected_date - timedelta(days=7)
+        next_date = selected_date + timedelta(days=7)
+
+    elif view_mode == "day":
+        prev_date = selected_date - timedelta(days=1)
+        next_date = selected_date + timedelta(days=1)
+
+    else:
+        prev_date = selected_date
+        next_date = selected_date
+
+    # ==========================
+    # 4. Calendar logic
+    # ==========================
+    cal = calendar.Calendar(firstweekday=0)
+
+    if view_mode == "month":
+        month_days = cal.monthdayscalendar(year, month)
+
+    elif view_mode == "week":
+        start_week = selected_date - timedelta(days=selected_date.weekday())
+        month_days = [[(start_week + timedelta(days=i)).day for i in range(7)]]
+
+    elif view_mode == "day":
+        month_days = [[day]]
+
+    else:
+        month_days = cal.monthdayscalendar(year, month)
+
+    # ==========================
+    # 5. Data
+    # ==========================
+    maintenances = Maintenance.objects.filter(
+        appointment_date__year=year,
+        appointment_date__month=month
+    )
+
+    fake_events = [
+        {"title": "Fix Aircon", "day": 14, "color": "red"},
+        {"title": "Repair Elevator", "day": 14, "color": "red"},
+        {"title": "Water System Check", "day": 9, "color": "green"},
+        {"title": "Electric Inspection", "day": 20, "color": "purple"},
+    ]
+
+    events_by_day = {}
+
+    for m in maintenances:
+        d = m.appointment_date.day
+        events_by_day.setdefault(d, []).append({
+            "title": m.title,
+            "color": "blue"
+        })
+
+    for e in fake_events:
+        d = e["day"]
+        events_by_day.setdefault(d, []).append({
+            "title": e["title"],
+            "color": e["color"]
+        })
+
+    context = {
+        "calendar": month_days,
+        "month_name": calendar.month_name[month],
+        "month_number": month,
+        "year": year,
+        "current_day": today.day,
+        "events_by_day": events_by_day,
+        "view_mode": view_mode,
+        "selected_date": selected_date,
+        "prev_date": prev_date.strftime("%Y-%m-%d"),
+        "next_date": next_date.strftime("%Y-%m-%d"),
+    }
+
+    return render(request, "issues/calendar_maintenance.html", context)
+
+def complaint_calendar(request):
+    return render(request, "issues/complaint_calendar.html")

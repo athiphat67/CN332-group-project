@@ -69,6 +69,8 @@ j# 🏡 ระบบบริหารจัดการหมู่บ้าน
 ### Week 5: Facade Pattern in project
 - **Presentation:** [Iteration 5 Slides](https://www.canva.com/design/DAHAvvavFFM/HOUiDaKPhY2ek7LEpf9VWA/view?utm_content=DAHAvvavFFM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=he9fad04ba6)
 
+### Week 6: Facade Pattern in project
+- **Presentation:** [Iteration 6 Slides](https://www.canva.com/design/DAHBRznlkXk/oznuqUfk21gcsGM5xwXzZg/edit?utm_content=DAHBRznlkXk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 ---
 
 ## 📝 Instructor Feedback Log

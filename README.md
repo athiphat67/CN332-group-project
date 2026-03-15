@@ -68,7 +68,7 @@ Simultaneously, for residents, BaanHao is designed to eliminate traditional comm
 
 ---
 
-## 📝 Instructor Feedback Log
+## Instructor Feedback Log
 
 > [!IMPORTANT]
 > **Date: 26/01/2026 (Iteration 1-3)**
@@ -76,7 +76,7 @@ Simultaneously, for residents, BaanHao is designed to eliminate traditional comm
 
 ---
 
-## 👥 Team Members
+## Team Members
 
 | Student ID | Name | Roles |
 | :---: | :--- | :--- |

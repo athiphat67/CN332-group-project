@@ -60,6 +60,9 @@ Simultaneously, for residents, BaanHao is designed to eliminate traditional comm
 | **Week 5: Facade Pattern in project** | [📊 Iteration 5 Slides](https://www.canva.com/design/DAHAvvavFFM/HOUiDaKPhY2ek7LEpf9VWA/view?utm_content=DAHAvvavFFM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=he9fad04ba6) |-|
 | **Week 6: Log in interface** | [📊 Iteration 6 Slides](https://www.canva.com/design/DAHBRznlkXk/oznuqUfk21gcsGM5xwXzZg/edit?utm_content=DAHBRznlkXk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) |-|
 | **Week 7: Implement plan** | [📊 Iteration 7 Slides](https://www.canva.com/design/DAHDLQnATVE/9BKB05CxdQyN2q5MyVqCfg/edit?utm_content=DAHDLQnATVE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) |-|
+| **Week 8 -  9: Development** | - |-|
+| **Week 10 -  11: Development** | - |-|
+| **Week 12 - final: Testing and Final** | - |-|
 
 ---
 
@@ -71,14 +74,79 @@ Simultaneously, for residents, BaanHao is designed to eliminate traditional comm
 
 ---
 
-## 👥 สมาชิกในกลุ่ม (Team Members)
+## 👥 Team Members
 
-| รหัสนักศึกษา | ชื่อ-นามสกุล | หน้าที่รับผิดชอบ (Roles) |
+| Student ID | Name | Roles |
 | :---: | :--- | :--- |
-| `6710615292` | อธิภัทร ศูนย์สิทธิ์ | Project Manager, Front-end, Back-end, QA |
+| `6710615292` | athiphat sunsit | Project Manager, Front-end, Back-end, QA |
 | `6710615060` | โชติวิชช์ ดังสะท้าน | Front-end |
 | `6710615185` | ภูริช อัมพะวา | Front-end, Back-end |
 | `6710545010` | นพัตธีรา เหลาเกิ้มหุ่ง | Front-end |
 | `6710615144` | ปณิธาน ตันตื้อ | Front-end |
 | `6710685055` | พัชรพล มาลัยศรี | Back-end, QA |
 | `6710685014` | ธีภพ รัตนทรัพย์ศิริ | Back-end |
+
+---
+
+# Software Design Artifacts
+
+### System Modeling (UML Diagrams)
+* **Use Case Diagram:** `empty` 
+* **Class Diagram:** `empty` 
+
+
+### Database Design
+* **Entity Relationship Diagram (ERD):** `empty` 
+
+### 3. User Interface (UI) & User Experience (UX)
+* **System Wireframes & Mockups:** `empty`
+
+---
+
+# Installation
+
+### Prerequisites 
+- **Git**
+- **Terminal**
+
+### Step-by-Step Installation
+
+**1. Clone the repository:**
+```bash
+git clone https://github.com/theepop66/CN332-group-project.git
+cd BaanHao
+```
+**2. Create and activate a virtual environment:**
+```bash
+# For Windows
+python -m venv venv
+venv\Scripts\activate
+
+# For macOS/Linux
+python3 -m venv venv
+
+source venv/bin/activate
+```
+
+**3. Install dependencies:**
+```bash
+pip install -r requirements.txt
+```
+
+**4. Environment Variables Setup:**
+```bash
+# about .env file. Let talk to Back-end Team :)
+```
+
+**5. Database Setup & Migration:**
+```bash
+# about database file. Let talk to Back-end Team :)
+```
+
+**6. Run the development server:**
+```bash
+python manage.py runserver
+
+# Note : when you runserver success you can click http://127.0.0.1:8000/ for use web application.
+```
+---

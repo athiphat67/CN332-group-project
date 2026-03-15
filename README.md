@@ -1,27 +1,36 @@
-j# 🏡 ระบบบริหารจัดการหมู่บ้านจัดสรรอัจฉริยะ
+<div align="center">
 
-> **Course:** CN332 - Object-Oriented Analysis and Design  
-> **Instructor:** ผู้ช่วยศาสตราจารย์ ดร.พิศาล แก้วประภา
+<img src="Documents/LOGO/baanhao_logo_White.png" alt="drawing" width="200"/>
+
+## **BaanHao: Smart Living Management System**
+## **CN332 Object-Oriented Analysis and Design Project**
+
+<div align="left">
+
 ---
 
-## 📄 Project Concept
+## Project Overview
 
-### 1. ภาพรวมและวัตถุประสงค์
-โครงการนี้มุ่งเน้นการแก้ Pain Points เดิมๆ ของการจัดการหมู่บ้านด้วยเทคโนโลยีอัจฉริยะ:
-* **Smart Assistant 24/7:** เป็นผู้ช่วยอัจฉริยะคอยตอบคำถาม รับเรื่องร้องเรียน และเฝ้าระวังภัยผ่านการวิเคราะห์เสียงและเซ็นเซอร์ 
-* **Seamless Communication:** เชื่อมต่อนิติบุคคลและลูกบ้านผ่าน LINE OA และ NLP Chatbot ลดระยะเวลารอคอย 
-* **Automated Operations:** ลดภาระงานเอกสารด้วยระบบตรวจสอบสลิปโอนเงินอัตโนมัติ (OCR) และคัดกรองงานด้วย AI 
-* **Transparency:** จัดเก็บข้อมูลโปร่งใส ตรวจสอบสถานะงานและบัญชีได้แบบ Real-time 
+BaanHao(บ้านเฮา) is a comprehensive property management platform tailored for housing estates and condominiums. It is engineered to optimize the operational efficiency of juristic persons while significantly enhancing the residential experience.
 
-### 2. ฟีเจอร์หลัก
+From an administrative standpoint, the platform focuses on streamlining redundant workflows. It resolves persistent issues such as repetitive handling of basic inquiries and the mismanagement of fragmented or unrecorded complaints.
 
-#### 📱 A. Line OA & Intelligent Service (ส่วนบริการลูกบ้าน)
-* **AI Complaint Handling:** รับเรื่องร้องเรียน (เช่น เสียงดังรบกวน) โดย AI จะวิเคราะห์แยกประเภทและส่งเรื่องให้ รปภ. ทันที 
-* **Rules & Regulations Query (RAG):** ลูกบ้านสามารถถามกฎระเบียบ (เช่น การเลี้ยงสัตว์) และได้รับคำตอบที่ถูกต้องจากคู่มือหมู่บ้านทันที 
-* **Visitor Management:** ระบบลงทะเบียนผู้มาติดต่อล่วงหน้า สร้าง QR Code ให้แขกสแกนเข้าไม้กั้นอัตโนมัติ พร้อมแจ้งเตือนลูกบ้านเมื่อแขกมาถึง
-* **Smart Payment:** ตรวจสอบสลิปโอนเงินค่าส่วนกลางด้วย OCR เทียบกับยอดเงินและบัญชีธนาคาร พร้อมออก E-Receipt ภายใน 3 วินาที 
-* **Smart Broadcast:** แจ้งเตือนกิจกรรมต่างๆ (เช่น ฉีดปลวก) ตามตารางปฏิทินกลางของนิติบุคคล 
+Simultaneously, for residents, BaanHao is designed to eliminate traditional communication barriers, emphasizing seamless accessibility and rapid response times.
 
+---
+
+## Key Features
+
+### For Residents (via LINE Official Account) 
+- **Automated FAQ & 24/7 Self-Service:** Instant automated responses for common inquiries such as community rules, outstanding balances, or emergency contacts.
+
+### For Juristic Person (via Web Application)
+- **Dashboard:** A central command hub providing a real-time overview of the system's status, recent activities, and key operational metrics at a glance.
+- **All Task (Complaint & Maintenance):** A comprehensive task management module categorizing resident complaints and maintenance requests. Staff can track progress, update ticket statuses, and manage workflows efficiently.
+- **Notice:** An announcement management system allowing staff to create, edit, and broadcast important community notices directly to residents.
+- **Event:** A feature to organize, schedule, and promote community events or activities to encourage resident engagement.
+- **Staff:** A role and account management system for juristic personnel, enabling administrators to control access levels and staff responsibilities securely.
+- **Analytics:** In-depth data visualization and reporting tools that analyze task resolution times, frequent issues, and overall operational efficiency to aid in data-driven decision-making.
 ---
 
 ## 🚀 Project Progess

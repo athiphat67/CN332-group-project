@@ -5,6 +5,7 @@ db.sqlite3
 .vevn/
 venv/
 .venv/
+.env
 
 # Mac OS
 .DS_Store

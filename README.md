@@ -148,9 +148,9 @@ python manage.py runserver
 # Note: When you run server successfully, you can click http://127.0.0.1:8000/ to use the web application.
 ```
 
-**6. Test Account :**
+**7. Test Account :**
 ```bash
-Name : admin
+Username : admin
 Password : admin12345
 ```
 ---
@@ -185,7 +185,7 @@ CN332-group-project/              # Root directory of the project
 │   │   ├── db.sqlite3            # Default SQLite database for local development
 │   │   └── manage.py             # Django command-line utility (runserver, migrate, etc.)
 │   ├── .gitignore                # Git ignore file for the source code level (e.g., venv)
-│   └── requirements.txt          # Python dependencies list (e.g., django, psycopg2)
+│   └── requirement.txt          # Python dependencies list (e.g., django, psycopg2)
 ├── .gitignore                    # Root level Git ignore file
 └── README.md                     # The main project documentation file (this file)
 ```

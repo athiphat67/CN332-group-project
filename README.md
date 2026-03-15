@@ -47,6 +47,9 @@ j# 🏡 ระบบบริหารจัดการหมู่บ้าน
 
 ### Week 6: Log in interface
 - **Presentation:** [Iteration 6 Slides](https://www.canva.com/design/DAHBRznlkXk/oznuqUfk21gcsGM5xwXzZg/edit?utm_content=DAHBRznlkXk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
+### Week 7: Implement plan
+- **Presentation:** [Iteration 6 Slides](https://www.canva.com/design/DAHDLQnATVE/9BKB05CxdQyN2q5MyVqCfg/edit?utm_content=DAHDLQnATVE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 ---
 
 ## 📝 Instructor Feedback Log

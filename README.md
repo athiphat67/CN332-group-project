@@ -82,6 +82,23 @@ Our team uses **GitHub Projects** (Kanban Board) to manage tasks, sprints, and o
 
 * **Project Board:** [View our Kanban Board Here](https://github.com/users/theepop66/projects/3/views/3)
 
+### Project Status
+
+![Open Issues](https://img.shields.io/github/issues/theepop66/CN332-group-project)
+![Closed Issues](https://img.shields.io/github/issues-closed/theepop66/CN332-group-project)
+
+### Task Distribution by Member
+
+> Tasks breakdown per team member (Backlog / In Progress / Done)
+
+![Task Distribution](docs/images/task-distribution.png)
+
+### Overall Status Summary
+
+> Current count of items across all workflow stages
+
+![Status Summary](docs/images/status-summary.png)
+
 ---
 
 # Software Design Artifacts

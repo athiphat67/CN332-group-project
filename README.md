@@ -76,17 +76,11 @@ Simultaneously, for residents, BaanHao is designed to eliminate traditional comm
 
 ---
 
-## Team Members
+# Project Trackability
 
-| Student ID | Name | Roles |
-| :---: | :--- | :--- |
-| `6710615292` | athiphat sunsit | Project Manager, Front-end, Back-end, QA |
-| `6710615060` | โชติวิชช์ ดังสะท้าน | Front-end |
-| `6710615185` | ภูริช อัมพะวา | Front-end, Back-end |
-| `6710545010` | นพัตธีรา เหลาเกิ้มหุ่ง | Front-end |
-| `6710615144` | ปณิธาน ตันตื้อ | Front-end |
-| `6710685055` | พัชรพล มาลัยศรี | Back-end, QA |
-| `6710685014` | ธีภพ รัตนทรัพย์ศิริ | Back-end |
+Our team uses **GitHub Projects** (Kanban Board) to manage tasks, sprints, and overall project progress following Agile methodologies. This ensures transparent collaboration and efficient workflow management.
+
+* **Project Board:** [View our Kanban Board Here](https://github.com/users/theepop66/projects/3/views/3)
 
 ---
 
@@ -193,6 +187,22 @@ CN332-group-project/              # Root directory of the project
 ├── .gitignore                    # Root level Git ignore file
 └── README.md                     # The main project documentation file (this file)
 ```
+
+---
+
+## Team Members
+
+| Student ID | Name | Roles |
+| :---: | :--- | :--- |
+| `6710615292` | athiphat sunsit | Project Manager, Front-end, Back-end, QA |
+| `6710615060` | โชติวิชช์ ดังสะท้าน | Front-end |
+| `6710615185` | ภูริช อัมพะวา | Front-end, Back-end |
+| `6710545010` | นพัตธีรา เหลาเกิ้มหุ่ง | Front-end |
+| `6710615144` | ปณิธาน ตันตื้อ | Front-end |
+| `6710685055` | พัชรพล มาลัยศรี | Back-end, QA |
+| `6710685014` | ธีภพ รัตนทรัพย์ศิริ | Back-end |
+
+---
 
 
 

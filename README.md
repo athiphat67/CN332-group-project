@@ -161,37 +161,37 @@ Password : admin12345
 
 # Project Structure
 ```markdown
-CN332-group-project/
-├── BannHao_CLI/
-├── Documents/
-│   ├── Database_Diagram/         
-│   ├── Iteration1/
-│   ├── Iteration2/
-│   ├── Iteration3/
-│   ├── Iteration4/          
-│   └── LOGO/           
-├── myproject/                    
-│   ├── baanhao_project/
-│   │   ├── analytics/
-│   │   ├── baanhao_project/
-│   │   ├── complaints/
-│   │   ├── dashboard/
-│   │   ├── issues/
-│   │   ├── maintenance/
-│   │   ├── media/profile_images/
-│   │   ├── notifications/
-│   │   ├── profile_images/
-│   │   ├── properties/
-│   │   ├── static/
-│   │   ├── templates/
-│   │   ├── users/
-│   │   ├── .env.example
-│   │   ├── db.sqlite3          
-│   │   └── manage.py                  
-│   ├── .gitignore            
-│   └── requirements.txt            
-├── .gitignore        
-└── README.md
+CN332-group-project/              # Root directory of the project
+├── BannHao_CLI/                  # Command Line Interface module (if applicable)
+├── Documents/                    # All project documentation and assets
+│   ├── Database_Diagram/         # Database design files (e.g., ER Diagram)
+│   ├── Iteration1/               # Documents and presentation slides for Week 1
+│   ├── Iteration2/               # Documents and presentation slides for Week 2
+│   ├── Iteration3/               # Documents and presentation slides for Week 3
+│   ├── Iteration4/               # Documents and presentation slides for Week 4
+│   └── LOGO/                     # Project logo image files
+├── myproject/                    # Main development folder (Source Code)
+│   ├── baanhao_project/          # Main Django project directory containing all apps
+│   │   ├── analytics/            # Django App: Data processing and statistics
+│   │   ├── baanhao_project/      # Django core configuration (settings.py, urls.py)
+│   │   ├── complaints/           # Django App: Resident complaint management
+│   │   ├── dashboard/            # Django App: Juristic admin dashboard UI/Logic
+│   │   ├── issues/               # Django App: General issues and ticketing system
+│   │   ├── maintenance/          # Django App: Maintenance request management
+│   │   ├── media/profile_images/ # Directory for user-uploaded media (e.g., profile pics)
+│   │   ├── notifications/        # Django App: Notification system & LINE API integration
+│   │   ├── profile_images/       # (Fallback/Default directory for profile pictures)
+│   │   ├── properties/           # Django App: Property and asset management
+│   │   ├── static/               # Directory for static files (CSS, JavaScript, Images)
+│   │   ├── templates/            # Directory for HTML templates (Frontend UI)
+│   │   ├── users/                # Django App: User management, authentication, and roles
+│   │   ├── .env.example          # Template for environment variables (e.g., DB credentials)
+│   │   ├── db.sqlite3            # Default SQLite database for local development
+│   │   └── manage.py             # Django command-line utility (runserver, migrate, etc.)
+│   ├── .gitignore                # Git ignore file for the source code level (e.g., venv)
+│   └── requirements.txt          # Python dependencies list (e.g., django, psycopg2)
+├── .gitignore                    # Root level Git ignore file
+└── README.md                     # The main project documentation file (this file)
 ```
 
 

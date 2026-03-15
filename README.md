@@ -11,7 +11,7 @@
 
 # Project Overview
 
-BaanHao(บ้านเฮา) is a comprehensive property management platform tailored for housing estates and condominiums. It is engineered to optimize the operational efficiency of juristic persons while significantly enhancing the residential experience.
+BaanHao is a comprehensive property management platform tailored for housing estates and condominiums. It is engineered to optimize the operational efficiency of juristic persons while significantly enhancing the residential experience.
 
 From an administrative standpoint, the platform focuses on streamlining redundant workflows. It resolves persistent issues such as repetitive handling of basic inquiries and the mismanagement of fragmented or unrecorded complaints.
 

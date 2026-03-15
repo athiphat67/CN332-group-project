@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="Documents/LOGO/baanhao_logo_White.png" alt="drawing" width="200"/>
+<img src="Documents/LOGO/baanhao_logo.png" alt="drawing" width="200"/>
 
 # **BaanHao: Smart Living Management System**
 ## **CN332 Object-Oriented Analysis and Design Project**

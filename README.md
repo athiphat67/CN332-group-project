@@ -2,14 +2,14 @@
 
 <img src="Documents/LOGO/baanhao_logo_White.png" alt="drawing" width="200"/>
 
-## **BaanHao: Smart Living Management System**
+# **BaanHao: Smart Living Management System**
 ## **CN332 Object-Oriented Analysis and Design Project**
 
 <div align="left">
 
 ---
 
-## Project Overview
+# Project Overview
 
 BaanHao(บ้านเฮา) is a comprehensive property management platform tailored for housing estates and condominiums. It is engineered to optimize the operational efficiency of juristic persons while significantly enhancing the residential experience.
 
@@ -19,7 +19,7 @@ Simultaneously, for residents, BaanHao is designed to eliminate traditional comm
 
 ---
 
-## Key Features
+# Key Features
 
 ### For Residents (via LINE Official Account) 
 - **Automated FAQ & 24/7 Self-Service:** Instant automated responses for common inquiries such as community rules, outstanding balances, or emergency contacts.
@@ -31,6 +31,25 @@ Simultaneously, for residents, BaanHao is designed to eliminate traditional comm
 - **Event:** A feature to organize, schedule, and promote community events or activities to encourage resident engagement.
 - **Staff:** A role and account management system for juristic personnel, enabling administrators to control access levels and staff responsibilities securely.
 - **Analytics:** In-depth data visualization and reporting tools that analyze task resolution times, frequent issues, and overall operational efficiency to aid in data-driven decision-making.
+---
+
+# Technical Stack
+
+### Frontend (Juristic Web Application)
+- **Core Languages:** ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+
+### Backend & API
+- **Framework:** ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
+- **Messaging API:** ![LINE](https://img.shields.io/badge/LINE-00C300?style=for-the-badge&logo=line&logoColor=white) 
+
+### Database
+- **Relational Database:** ![PostgreSQL](https://img.shields.io/badge/postgresql-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+
+### Tools & Management
+- **Design & Prototyping:** ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white) 
+- **Version Control:** ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
+- **Project Management:** ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) 
+
 ---
 
 ## 🚀 Project Progess

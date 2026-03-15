@@ -93,7 +93,7 @@ Our team uses **GitHub Projects** (Kanban Board) to manage tasks, sprints, and o
 
 ![Task Distribution](Documents/image_project_track/image2.png)
 
-| Team Member | Total Tasks | 🟢 Done | 🟡 In Progress | 🔵 Backlog |
+| Team Member | Total Tasks | 🔴 Done | 🟢 In Progress | 🔵 Backlog |
 | :--- | :---: | :---: | :---: | :---: |
 | @athiphat67 | 29 | 23 | 1 | 5 |
 | @theepop66 | 24 | 18 | 1 | 5 |

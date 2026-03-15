@@ -141,6 +141,8 @@ pip install -r requirement.txt
 
 **6. Run the development server:**
 ```bash
+cd baanhao_project
+
 python manage.py runserver
 
 # Note: When you run server successfully, you can click http://127.0.0.1:8000/ to use the web application.

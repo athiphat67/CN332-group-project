@@ -2,9 +2,9 @@
 *.pyc
 __pycache__/
 db.sqlite3
+.vevn/
+venv/
 .venv/
-env/
-.env
 
 # Mac OS
 .DS_Store

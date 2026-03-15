@@ -31,6 +31,7 @@ Simultaneously, for residents, BaanHao is designed to eliminate traditional comm
 - **Event:** A feature to organize, schedule, and promote community events or activities to encourage resident engagement.
 - **Staff:** A role and account management system for juristic personnel, enabling administrators to control access levels and staff responsibilities securely.
 - **Analytics:** In-depth data visualization and reporting tools that analyze task resolution times, frequent issues, and overall operational efficiency to aid in data-driven decision-making.
+
 ---
 
 # Technical Stack
@@ -51,7 +52,8 @@ Simultaneously, for residents, BaanHao is designed to eliminate traditional comm
 - **Project Management:** ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) 
 
 ---
-| Project Progress | Doc & Sildes| Presentation Date |
+
+| Project Progress | Doc & Slides | Presentation Date |
 |---|---|---|
 | **Week 1: Concept** | [📄 Concept Paper](Documents/Iteration1/hm1_CONCEPT_PAPER.pdf) <br> [📊 Iteration 1 Slides](Documents/Iteration1/iteration1-BaanHao.pdf) |-|
 | **Week 2: Requirements** | [📄 การแจกแจง Requirement](Documents/Iteration2/hm2_การแจกแจงrequirement.pdf) <br> [📊 Iteration 2 Slides](Documents/Iteration2/iteration2-BaanHao.pdf) |-|
@@ -62,7 +64,7 @@ Simultaneously, for residents, BaanHao is designed to eliminate traditional comm
 | **Week 7: Implement plan** | [📊 Iteration 7 Slides](https://www.canva.com/design/DAHDLQnATVE/9BKB05CxdQyN2q5MyVqCfg/edit?utm_content=DAHDLQnATVE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) |-|
 | **Week 8 -  9: Development** | - |-|
 | **Week 10 -  11: Development** | - |-|
-| **Week 12 - final: Testing and Final** | - |-|
+| **Week 12 - Final: Testing and Final** | - |-|
 
 ---
 
@@ -90,12 +92,11 @@ Simultaneously, for residents, BaanHao is designed to eliminate traditional comm
 
 # Software Design Artifacts
 
-### System Modeling (UML Diagrams)
+### 1. System Modeling (UML Diagrams)
 * **Use Case Diagram:** `empty` 
 * **Class Diagram:** `empty` 
 
-
-### Database Design
+### 2. Database Design
 * **Entity Relationship Diagram (ERD):** `empty` 
 
 ### 3. User Interface (UI) & User Experience (UX)
@@ -113,9 +114,10 @@ Simultaneously, for residents, BaanHao is designed to eliminate traditional comm
 
 **1. Clone the repository:**
 ```bash
-git clone https://github.com/theepop66/CN332-group-project.git
-cd BaanHao
+git clone [https://github.com/theepop66/CN332-group-project.git](https://github.com/theepop66/CN332-group-project.git) CN332
+cd CN332/myproject
 ```
+
 **2. Create and activate a virtual environment:**
 ```bash
 # For Windows
@@ -147,6 +149,52 @@ pip install -r requirements.txt
 ```bash
 python manage.py runserver
 
-# Note : when you runserver success you can click http://127.0.0.1:8000/ for use web application.
+# Note: When you run server successfully, you can click http://127.0.0.1:8000/ to use the web application.
+```
+
+**6. Test Account :**
+```bash
+Name : admin
+Password : admin12345
 ```
 ---
+
+# Project Structure
+```markdown
+CN332-group-project/
+├── BannHao_CLI/
+├── Documents/
+│   ├── Database_Diagram/         
+│   ├── Iteration1/
+│   ├── Iteration2/
+│   ├── Iteration3/
+│   ├── Iteration4/          
+│   └── LOGO/           
+├── myproject/                    
+│   ├── baanhao_project/
+│   │   ├── analytics/
+│   │   ├── baanhao_project/
+│   │   ├── complaints/
+│   │   ├── dashboard/
+│   │   ├── issues/
+│   │   ├── maintenance/
+│   │   ├── media/profile_images/
+│   │   ├── notifications/
+│   │   ├── profile_images/
+│   │   ├── properties/
+│   │   ├── static/
+│   │   ├── templates/
+│   │   ├── users/
+│   │   ├── .env.example
+│   │   ├── db.sqlite3          
+│   │   └── manage.py                  
+│   ├── .gitignore            
+│   └── requirements.txt            
+├── .gitignore        
+└── README.md
+```
+
+
+
+
+

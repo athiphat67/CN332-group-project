@@ -91,13 +91,25 @@ Our team uses **GitHub Projects** (Kanban Board) to manage tasks, sprints, and o
 
 > Tasks breakdown per team member (Backlog / In Progress / Done)
 
-![Task Distribution](docs/images/task-distribution.png)
+![Task Distribution](Documents/image_project_track/image2.png)
+
+| Team Member | Total Tasks | 🟢 Done | 🟡 In Progress | 🔵 Backlog |
+| :--- | :---: | :---: | :---: | :---: |
+| @athiphat67 | 29 | 23 | 1 | 5 |
+| @theepop66 | 24 | 18 | 1 | 5 |
+| @6710615185 | 23 | 17 | 1 | 5 |
+| @Phatcharaphon-work | 18 | 12 | 1 | 5 |
+| @Chotiwit67 | 16 | 10 | 1 | 5 |
+| @panifield | 16 | 10 | 1 | 5 |
+| @napattiral276 | 15 | 9 | 1 | 5 |
+
+* Lastest Update 16 Mar 2026
 
 ### Overall Status Summary
 
 > Current count of items across all workflow stages
 
-![Status Summary](docs/images/status-summary.png)
+![Status Summary](Documents/image_project_track/image1.png)
 
 ---
 
